@@ -3,23 +3,29 @@ package fast.kopach.math.games;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
 public class Game1 extends AppCompatActivity {
     TextView textView;
     String textPryklad = "";
     private int score = 0;
+    private int bestScore;
     private int min_value;
     private int max_value;
     private Random random;
     private int result;
     String myAnswer = "";
     HeaderFragment headerFragment;
+    Handler handler;
+    ReplayFragment replayFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,10 @@ public class Game1 extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
+        bestScore = PreferenceHelper.getBestScoreGame(1, this);
+        headerFragment.setBestScore(bestScore);
+        handler = new Handler();
+        replayFragment = new ReplayFragment();
         buildGame();
     }
 
@@ -51,17 +61,44 @@ public class Game1 extends AppCompatActivity {
     }
 
     private void checkAnswer() {
-        if (Integer.parseInt(myAnswer) == result) {
-            score += 1;
-            headerFragment.setScore(score);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    buildGame();
+        if (!myAnswer.equals("")) {
+            if (Integer.parseInt(myAnswer) == result) {
+                score += 1;
+                if (score > bestScore) {
+                    bestScore = score;
+                    PreferenceHelper.writeBestScoreGame(1, bestScore, this);
+                    headerFragment.setBestScore(bestScore);
                 }
-            }, 500);
+                headerFragment.setScore(score);
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        buildGame();
+                    }
+                }, 500);
+            } else {
+                replayFragment.show(getFragmentManager(), "", new ReplayFragment.ReplayListener() {
+                    @Override
+                    void onReplayClick() {
+                        Log.d("tag", "replayClick");
+                        score = 0;
+                        headerFragment.setScore(score);
+                        replayFragment.dismiss();
+                        buildGame();
+                    }
+
+                    @Override
+                    void onBackClick() {
+
+                    }
+
+                    @Override
+                    void onSettingClick() {
+
+                    }
+                });
+            }
         } else {
-//        TODO Show replay
+            Toast.makeText(this, "Введіть відповідь!", Toast.LENGTH_SHORT).show();
         }
     }
 

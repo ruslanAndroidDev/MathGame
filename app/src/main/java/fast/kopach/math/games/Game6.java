@@ -1,23 +1,28 @@
 package fast.kopach.math.games;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import java.util.Random;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
-import fast.kopach.math.ReplayDialog;
 
 public class Game6 extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4, btn5;
     Button[] buttons;
     int score;
+    int bestScore;
     Random random;
     String pryklad;
     Button trueBtn;
+    Handler handler;
     private HeaderFragment headerFragment;
+    ReplayFragment replayDialog;
 
 
     @Override
@@ -30,18 +35,34 @@ public class Game6 extends AppCompatActivity {
         btn4 = (Button) findViewById(R.id.game6_btn4);
         btn5 = (Button) findViewById(R.id.game6_btn5);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
+        bestScore = PreferenceHelper.getBestScoreGame(6, this);
+        headerFragment.setBestScore(bestScore);
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
+        handler = new Handler();
+        replayDialog = new ReplayFragment();
         buildGame();
     }
 
-    public void game6Click(View view) {
+    public void game6Click(final View view) {
         if (((Button) view) == trueBtn) {
             score += 1;
-            buildGame();
+            if (score > bestScore) {
+                bestScore = score;
+                PreferenceHelper.writeBestScoreGame(6, bestScore, this);
+                headerFragment.setBestScore(bestScore);
+            }
+            headerFragment.setScore(score);
+            view.setBackgroundColor(Color.GREEN);
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    buildGame();
+                    view.setBackgroundColor(Color.parseColor("#4370c2"));
+                }
+            }, 500);
         } else {
-            ReplayFragment replayDialog = new ReplayFragment();
-            replayDialog.show(getFragmentManager(),"");
+            view.setBackgroundColor(Color.RED);
+            replayDialog.show(getFragmentManager(), "");
         }
     }
 

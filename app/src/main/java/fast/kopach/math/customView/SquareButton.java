@@ -41,8 +41,26 @@ public class SquareButton extends Button {
 
         StateListDrawable states = new StateListDrawable();
         states.addState(new int[]{android.R.attr.state_pressed}, state_pressed);
+        states.addState(new int[]{android.R.attr.state_selected}, state_pressed);
 
         states.addState(new int[]{android.R.attr.state_enabled}, state_normal);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            setBackground(states);
+        } else {
+            setBackgroundDrawable(states);
+        }
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        Drawable state_pressed = getResources().getDrawable(R.drawable.round_button).mutate();
+        state_pressed.setColorFilter(ContextCompat.getColor(getContext(), R.color.game2Pressed), PorterDuff.Mode.SRC_ATOP);
+
+        StateListDrawable states = new StateListDrawable();
+        states.addState(new int[]{android.R.attr.state_pressed}, state_pressed);
+        states.addState(new int[]{android.R.attr.state_selected}, state_pressed);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             setBackground(states);

@@ -1,8 +1,10 @@
 package fast.kopach.math.menu;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import fast.kopach.math.R;
 
@@ -21,5 +23,17 @@ public class MenuActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+    }
+
+    public void onMenuButtonClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_exit:
+                finish();
+                break;
+            case R.id.btn_coin:
+                break;
+            case R.id.btn_setting:
+                break;
+        }
     }
 }

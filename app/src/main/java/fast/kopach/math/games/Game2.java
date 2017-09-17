@@ -1,10 +1,8 @@
 package fast.kopach.math.games;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.customView.SquareButton;
 
@@ -22,6 +21,7 @@ public class Game2 extends AppCompatActivity {
     String taskStr = "";
     Random random;
     int score = 0;
+    int bestScore;
     int true_answer;
     TextView tv2;
     Button[] buttonArray;
@@ -43,12 +43,13 @@ public class Game2 extends AppCompatActivity {
         variantbtn6 = (Button) findViewById(R.id.btn6);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         buttonArray = new Button[]{variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6};
+        bestScore = PreferenceHelper.getBestScoreGame(2, this);
+        headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
     }
 
     private void buildGame() {
-//        int propysk = random.nextInt(3);
         int propysk = 0;
         int number1 = random.nextInt(25) + score * 5;
         int number2 = random.nextInt(25) + score * 3;
@@ -90,12 +91,19 @@ public class Game2 extends AppCompatActivity {
         final View view1 = view;
         if (Integer.parseInt(((Button) view).getText().toString()) == true_answer) {
             ((SquareButton) view).setColor(Color.GREEN);
+            score += 1;
+            if (score > bestScore) {
+                bestScore = score;
+                PreferenceHelper.writeBestScoreGame(2, bestScore, this);
+                headerFragment.setBestScore(bestScore);
+            }
+            headerFragment.setScore(score);
             handler.postDelayed(new Runnable() {
                 public void run() {
                     ((SquareButton) view1).setColor(ContextCompat.getColor(Game2.this, R.color.game2Btn));
                     buildGame();
                 }
-            }, 1000);
+            }, 500);
         } else {
             Toast.makeText(this, "You are lose", Toast.LENGTH_SHORT).show();
         }

@@ -26,17 +26,12 @@ public class HeaderFragment extends Fragment {
         View v = inflater.inflate(R.layout.score_element, container, false);
         best_score_tv = (TextView) v.findViewById(R.id.tv_bs);
         score_tv = (TextView) v.findViewById(R.id.tv_score);
-        setScore(0);
-        setBestScore(1);
         return v;
     }
 
     public void setScore(int score) {
         String text = "<font color=#ff000000>Score: </font> <font color=#0404B4>" + score + "</font>";
         score_tv.setText(Html.fromHtml(text));
-        if (score > bestScore) {
-            setBestScore(bestScore);
-        }
 
     }
 
