@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="fast.kopach.math.games.Game4">
+
+    <fragment
+        android:id="@+id/header"
+        class="fast.kopach.math.games.HeaderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"></fragment>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn11"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn12"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn13"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn14"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn15"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn16"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn17"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn18"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn19"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn20"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn21"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn22"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn23"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+
+                <fast.kopach.math.customView.SquareButton
+                    android:id="@+id/game4_btn24"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    style="@style/Game4BtnStyle"
+                    android:onClick="onClick" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
