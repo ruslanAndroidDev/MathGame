@@ -100,14 +100,16 @@
             android:padding="5dp"
             android:src="@drawable/ic_settings_black_24dp" />
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/banner1"
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewBanner1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-8320045635693885/1086752288"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/adViewBanner1">
+        </com.google.android.gms.ads.AdView>
 
     </RelativeLayout>
 

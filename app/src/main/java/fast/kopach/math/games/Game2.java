@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
@@ -47,6 +49,9 @@ public class Game2 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
     }
 
     private void buildGame() {

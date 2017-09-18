@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -69,6 +71,8 @@ public class Game4 extends AppCompatActivity {
         values = new ArrayList<>();
         valuesForCheck = new ArrayList<>();
         buildGame();
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
     }
 
     private void buildGame() {

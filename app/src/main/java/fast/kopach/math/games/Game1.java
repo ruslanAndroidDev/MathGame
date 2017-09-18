@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
@@ -39,6 +41,9 @@ public class Game1 extends AppCompatActivity {
         handler = new Handler();
         replayFragment = new ReplayFragment();
         buildGame();
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
     }
 
     public void numberClick(View view) {

@@ -6,10 +6,15 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import fast.kopach.math.R;
 
@@ -22,6 +27,8 @@ public class ReplayFragment extends DialogFragment implements View.OnClickListen
     ImageView replay;
     ImageView back;
     ImageView setting;
+
+    private AdView mAdViewBanner1;
 
     public ReplayFragment() {
     }
@@ -39,6 +46,13 @@ public class ReplayFragment extends DialogFragment implements View.OnClickListen
         back.setOnClickListener(this);
         setting = (ImageView) v.findViewById(R.id.replay_setting);
         setting.setOnClickListener(this);
+
+/////////////////////////////////////////////////////////////////////////
+        mAdViewBanner1 = (AdView) v.findViewById(R.id.adViewBanner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdViewBanner1.loadAd(adRequest);
+        //////////////////////////////////////////////////
+
         return builder.create();
     }
 
