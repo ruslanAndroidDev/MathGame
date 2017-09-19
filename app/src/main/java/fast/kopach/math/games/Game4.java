@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,9 @@ public class Game4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game4);
+
+        PreferenceHelper.setLaunchedGame(4);
+
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         bestScore = PreferenceHelper.getBestScoreGame(4, this);
         headerFragment.setScore(score);
@@ -71,8 +75,6 @@ public class Game4 extends AppCompatActivity {
         values = new ArrayList<>();
         valuesForCheck = new ArrayList<>();
         buildGame();
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
     }
 
     private void buildGame() {
@@ -111,9 +113,12 @@ public class Game4 extends AppCompatActivity {
             }
         } else {
             clickedBtn.setColor(Color.RED);
-            ReplayFragment replayFragment = new ReplayFragment();
-            replayFragment.show(getFragmentManager(), "");
+           // ReplayActivity replayActivity = new ReplayActivity();
+           // replayActivity.show(getFragmentManager(), "");
 //            findTrueButton();
+
+            Intent intentReplay = new Intent(this, ReplayActivity.class);
+            startActivity(intentReplay);
         }
     }
 

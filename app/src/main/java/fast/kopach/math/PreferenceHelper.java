@@ -9,21 +9,31 @@ import android.content.SharedPreferences;
 
 public class PreferenceHelper {
     static String PREFERENCE_NAME = "fastMathPref";
-    static SharedPreferences sp;
+    static SharedPreferences sheredPreferences;
 
     public static int getBestScoreGame(int game, Context context) {
-        if (sp == null) {
-            sp = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        if (sheredPreferences == null) {
+            sheredPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         }
-        return sp.getInt("bestScore" + game, 0);
+        return sheredPreferences.getInt("bestScore" + game, 0);
     }
 
     public static void writeBestScoreGame(int game, int bestScore, Context context) {
-        if (sp == null) {
-            sp = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        if (sheredPreferences == null) {
+            sheredPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         }
-        SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences.Editor editor = sheredPreferences.edit();
         editor.putInt("bestScore" + game, bestScore);
         editor.commit();
+    }
+
+    public static void setLaunchedGame(int game){
+        SharedPreferences.Editor editor = sheredPreferences.edit();
+        editor.putInt("launchedGame", game);
+        editor.commit();
+    }
+
+    public int getLaunchedGame(){
+        return sheredPreferences.getInt("launchedGame", 0);
     }
 }

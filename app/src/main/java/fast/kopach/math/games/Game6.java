@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,13 +25,16 @@ public class Game6 extends AppCompatActivity {
     Button trueBtn;
     Handler handler;
     private HeaderFragment headerFragment;
-    ReplayFragment replayDialog;
+    ReplayActivity replayDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game6);
+
+        PreferenceHelper.setLaunchedGame(6);
+
         btn1 = (Button) findViewById(R.id.game6_btn1);
         btn2 = (Button) findViewById(R.id.game6_btn2);
         btn3 = (Button) findViewById(R.id.game6_btn3);
@@ -42,11 +46,8 @@ public class Game6 extends AppCompatActivity {
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
         handler = new Handler();
-        replayDialog = new ReplayFragment();
+        replayDialog = new ReplayActivity();
         buildGame();
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
-
     }
 
     public void game6Click(final View view) {
@@ -67,7 +68,9 @@ public class Game6 extends AppCompatActivity {
             }, 500);
         } else {
             view.setBackgroundColor(Color.RED);
-            replayDialog.show(getFragmentManager(), "");
+           // replayDialog.show(getFragmentManager(), "");
+            Intent intentReplay = new Intent(this, ReplayActivity.class);
+            startActivity(intentReplay);
         }
     }
 

@@ -22,65 +22,82 @@ import fast.kopach.math.R;
  * Created by Руслан on 16.09.2017.
  */
 
-public class ReplayFragment extends DialogFragment implements View.OnClickListener {
-    ReplayListener listener;
+public class ReplayActivity extends AppCompatActivity implements View.OnClickListener {
+  //  ReplayListener listener;
     ImageView replay;
     ImageView back;
     ImageView setting;
 
     private AdView mAdViewBanner1;
 
-    public ReplayFragment() {
-    }
-
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.replay_activity);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+        // public void onCreate(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.replay_dialog, null);
-        builder.setView(v);
-        replay = (ImageView) v.findViewById(R.id.replay_replay);
+      //  AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+      //  LayoutInflater inflater = getActivity().getLayoutInflater();
+      //  View v = inflater.inflate(R.layout.replay_activity, null);
+      //  builder.setView(v);
+        replay = (ImageView) findViewById(R.id.replay_replay);
         replay.setOnClickListener(this);
-        back = (ImageView) v.findViewById(R.id.replay_back);
+        back = (ImageView) findViewById(R.id.replay_back);
         back.setOnClickListener(this);
-        setting = (ImageView) v.findViewById(R.id.replay_setting);
+        setting = (ImageView) findViewById(R.id.replay_setting);
         setting.setOnClickListener(this);
 
 /////////////////////////////////////////////////////////////////////////
-        mAdViewBanner1 = (AdView) v.findViewById(R.id.adViewBanner1);
+        mAdViewBanner1 = (AdView) findViewById(R.id.adViewBanner1);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdViewBanner1.loadAd(adRequest);
         //////////////////////////////////////////////////
 
-        return builder.create();
+      //  return builder.create();
     }
 
-    public void show(FragmentManager manager, String tag, ReplayListener listener) {
+  /*  public void show(FragmentManager manager, String tag, ReplayListener listener) {
         super.show(manager, tag);
         this.listener = listener;
-    }
+    }  */
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.replay_back:
-                listener.onBackClick();
+               // listener.onBackClick();
+                onBackClick();
                 break;
             case R.id.replay_replay:
-                listener.onReplayClick();
+               // listener.onReplayClick();
+                onReplayClick();
                 break;
             case R.id.replay_setting:
-                listener.onSettingClick();
+               // listener.onSettingClick();
+                onSettingClick();
                 break;
         }
     }
 
-    static abstract class ReplayListener {
+    private void onSettingClick() {
+    }
+
+    private void onReplayClick() {
+    }
+
+    private void onBackClick() {
+    }
+
+
+
+
+   /* static abstract class ReplayListener {
         abstract void onReplayClick();
 
         abstract void onBackClick();
 
         abstract void onSettingClick();
-    }
+    }  */
 }

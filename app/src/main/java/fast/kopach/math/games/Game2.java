@@ -35,11 +35,14 @@ public class Game2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game2);
+
+        PreferenceHelper.setLaunchedGame(2);
+
         random = new Random();
         tv2 = (TextView) findViewById(R.id.tv2);
-        variantbtn1 = (Button) findViewById(R.id.btn1);
-        variantbtn2 = (Button) findViewById(R.id.btn2);
-        variantbtn3 = (Button) findViewById(R.id.btn3);
+        variantbtn1 = (Button) findViewById(R.id.btn2);
+        variantbtn3 = (Button) findViewById(R.id.btn1);
+        variantbtn2 = (Button) findViewById(R.id.btn3);
         variantbtn4 = (Button) findViewById(R.id.btn4);
         variantbtn5 = (Button) findViewById(R.id.btn5);
         variantbtn6 = (Button) findViewById(R.id.btn6);
@@ -49,9 +52,6 @@ public class Game2 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
-
     }
 
     private void buildGame() {

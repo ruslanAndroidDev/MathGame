@@ -1,13 +1,15 @@
 package fast.kopach.math.games;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 import java.util.Random;
@@ -27,22 +29,26 @@ public class Game1 extends AppCompatActivity {
     String myAnswer = "";
     HeaderFragment headerFragment;
     Handler handler;
-    ReplayFragment replayFragment;
+   // ReplayActivity replayActivity;
+   // PreferenceHelper preferenceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game1);
+
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         bestScore = PreferenceHelper.getBestScoreGame(1, this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
-        replayFragment = new ReplayFragment();
-        buildGame();
+      //  replayActivity = new ReplayActivity();
+      //  preferenceHelper = new PreferenceHelper();
 
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+        PreferenceHelper.setLaunchedGame(1);
+
+        buildGame();
 
     }
 
@@ -81,13 +87,20 @@ public class Game1 extends AppCompatActivity {
                     }
                 }, 500);
             } else {
-                replayFragment.show(getFragmentManager(), "", new ReplayFragment.ReplayListener() {
+                score = 0;
+                headerFragment.setScore(score);
+
+                Intent intentReplay = new Intent(this, ReplayActivity.class);
+                startActivity(intentReplay);
+               // replayActivity.dismiss();
+               // buildGame();
+               /* replayActivity.show(getFragmentManager(), "", new ReplayActivity.ReplayListener() {
                     @Override
                     void onReplayClick() {
                         Log.d("tag", "replayClick");
                         score = 0;
                         headerFragment.setScore(score);
-                        replayFragment.dismiss();
+                        replayActivity.dismiss();
                         buildGame();
                     }
 
@@ -100,7 +113,7 @@ public class Game1 extends AppCompatActivity {
                     void onSettingClick() {
 
                     }
-                });
+                }); */
             }
         } else {
             Toast.makeText(this, "Введіть відповідь!", Toast.LENGTH_SHORT).show();
