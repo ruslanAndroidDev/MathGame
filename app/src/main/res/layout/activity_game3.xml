@@ -1,43 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fast.kopach.math.games.Game3">
+
     <fragment
         android:id="@+id/header"
         class="fast.kopach.math.games.HeaderFragment"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="wrap_content"></fragment>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"></fragment>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="28dp"
-        android:layout_marginRight="10dp"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp">
+
+                <TextView
+                    android:id="@+id/tv_znak_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="-"
+
+                    android:textColor="#000000"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:id="@+id/example_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:lines="2"
+                    android:textColor="#000000"
+                    android:textSize="50sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="\?"
+            android:textColor="#222dab"
+            android:textSize="90sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="5dp">
+
+                <TextView
+                    android:id="@+id/tv_znak_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="-"
+
+                    android:textColor="#000000"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:id="@+id/example_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:lines="2"
+                    android:textColor="#000000"
+                    android:textSize="50sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="10dp"
-        android:layout_alignParentBottom="true">
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
         <fast.kopach.math.customView.SquareButton
+            android:id="@+id/game3_btn_small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text=""/>
+            android:background="@color/game2Btn"
+            android:onClick="game3Click"
+            android:text="&lt;"
+            android:textColor="#FFF"
+            android:textSize="42sp" />
+
         <fast.kopach.math.customView.SquareButton
+            android:id="@+id/game3_btn_equals"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:layout_margin="5dp"
+            android:background="@color/game2Btn"
+            android:onClick="game3Click"
             android:text="="
-            android:textSize="28sp" />
+            android:textColor="#FFF"
+            android:textSize="42sp" />
+
         <fast.kopach.math.customView.SquareButton
+            android:id="@+id/game3_btn_bigger"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:text=""/>
+            android:background="@color/game2Btn"
+            android:onClick="game3Click"
+            android:text="&gt;"
+            android:textColor="#FFF"
+            android:textSize="42sp" />
     </LinearLayout>
 
 </RelativeLayout>
