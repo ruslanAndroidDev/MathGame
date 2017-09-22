@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "595862461823",
+    "firebase_url": "https://fast-math-e92ab.firebaseio.com",
+    "project_id": "fast-math-e92ab",
+    "storage_bucket": "fast-math-e92ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595862461823:android:f9e52f1650bea3d1",
+        "android_client_info": {
+          "package_name": "fast.kopach.math"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595862461823-gco5tj5s05m1t7ppu1m1f1c7e0d7ekcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8dnW3uwUbbURtDcVtMFzVUTTaPa20RvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

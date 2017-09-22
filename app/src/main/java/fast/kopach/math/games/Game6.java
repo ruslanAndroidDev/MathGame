@@ -25,7 +25,6 @@ public class Game6 extends AppCompatActivity {
     Button trueBtn;
     Handler handler;
     private HeaderFragment headerFragment;
-    ReplayActivity replayDialog;
 
 
     @Override
@@ -46,7 +45,6 @@ public class Game6 extends AppCompatActivity {
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
         handler = new Handler();
-        replayDialog = new ReplayActivity();
         buildGame();
     }
 
@@ -69,8 +67,6 @@ public class Game6 extends AppCompatActivity {
         } else {
             view.setBackgroundColor(Color.RED);
            // replayDialog.show(getFragmentManager(), "");
-            Intent intentReplay = new Intent(this, ReplayActivity.class);
-            startActivity(intentReplay);
         }
     }
 

@@ -1,16 +1,11 @@
 package fast.kopach.math.games;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.Random;
 
@@ -29,8 +24,8 @@ public class Game1 extends AppCompatActivity {
     String myAnswer = "";
     HeaderFragment headerFragment;
     Handler handler;
-   // ReplayActivity replayActivity;
-   // PreferenceHelper preferenceHelper;
+    ReplayDialog replayDialog;
+    // PreferenceHelper preferenceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +38,9 @@ public class Game1 extends AppCompatActivity {
         bestScore = PreferenceHelper.getBestScoreGame(1, this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
-      //  replayActivity = new ReplayActivity();
-      //  preferenceHelper = new PreferenceHelper();
+        replayDialog = new ReplayDialog();
+        //  replayActivity = new ReplayActivity();
+        //  preferenceHelper = new PreferenceHelper();
 
         PreferenceHelper.setLaunchedGame(1);
 
@@ -89,11 +85,9 @@ public class Game1 extends AppCompatActivity {
             } else {
                 score = 0;
                 headerFragment.setScore(score);
-
-                Intent intentReplay = new Intent(this, ReplayActivity.class);
-                startActivity(intentReplay);
-               // replayActivity.dismiss();
-               // buildGame();
+                replayDialog.show(getFragmentManager(), "", null);
+                // replayActivity.dismiss();
+                // buildGame();
                /* replayActivity.show(getFragmentManager(), "", new ReplayActivity.ReplayListener() {
                     @Override
                     void onReplayClick() {

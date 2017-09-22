@@ -34,6 +34,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         rewardedVideoAd.setRewardedVideoAdListener(this);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
 
       //  loadRewardedVideoAd();
     }

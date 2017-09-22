@@ -116,9 +116,6 @@ public class Game4 extends AppCompatActivity {
            // ReplayActivity replayActivity = new ReplayActivity();
            // replayActivity.show(getFragmentManager(), "");
 //            findTrueButton();
-
-            Intent intentReplay = new Intent(this, ReplayActivity.class);
-            startActivity(intentReplay);
         }
     }
 
