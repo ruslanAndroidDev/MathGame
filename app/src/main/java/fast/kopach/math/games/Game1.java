@@ -77,25 +77,15 @@ public class Game1 extends AppCompatActivity {
                     headerFragment.setBestScore(bestScore);
                 }
                 headerFragment.setScore(score);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        buildGame();
-                    }
-                }, 500);
+                buildGame();
             } else {
-                score = 0;
-                headerFragment.setScore(score);
-                replayDialog.show(getFragmentManager(), "", null);
-                // replayActivity.dismiss();
-                // buildGame();
-               /* replayActivity.show(getFragmentManager(), "", new ReplayActivity.ReplayListener() {
+                replayDialog.show(getFragmentManager(), score, "", new ReplayDialog.ReplayListener() {
                     @Override
                     void onReplayClick() {
-                        Log.d("tag", "replayClick");
+                        replayDialog.dismiss();
                         score = 0;
-                        headerFragment.setScore(score);
-                        replayActivity.dismiss();
                         buildGame();
+                        headerFragment.setScore(score);
                     }
 
                     @Override
@@ -107,7 +97,7 @@ public class Game1 extends AppCompatActivity {
                     void onSettingClick() {
 
                     }
-                }); */
+                });
             }
         } else {
             Toast.makeText(this, "Введіть відповідь!", Toast.LENGTH_SHORT).show();
