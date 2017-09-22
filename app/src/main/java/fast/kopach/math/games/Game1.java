@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.menu.MenuActivity;
 
 public class Game1 extends AppCompatActivity {
     TextView textView;
@@ -39,10 +41,6 @@ public class Game1 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
         replayDialog = new ReplayDialog();
-        //  replayActivity = new ReplayActivity();
-        //  preferenceHelper = new PreferenceHelper();
-
-        PreferenceHelper.setLaunchedGame(1);
 
         buildGame();
 
@@ -79,7 +77,7 @@ public class Game1 extends AppCompatActivity {
                 headerFragment.setScore(score);
                 buildGame();
             } else {
-                replayDialog.show(getFragmentManager(), score, "", new ReplayDialog.ReplayListener() {
+                replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
                     @Override
                     void onReplayClick() {
                         replayDialog.dismiss();
@@ -90,12 +88,7 @@ public class Game1 extends AppCompatActivity {
 
                     @Override
                     void onBackClick() {
-
-                    }
-
-                    @Override
-                    void onSettingClick() {
-
+                        finish();
                     }
                 });
             }

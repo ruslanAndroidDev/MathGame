@@ -27,12 +27,6 @@ public class PreferenceHelper {
         editor.commit();
     }
 
-    public static void setLaunchedGame(int game){
-        SharedPreferences.Editor editor = sheredPreferences.edit();
-        editor.putInt("launchedGame", game);
-        editor.commit();
-    }
-
     public int getLaunchedGame(){
         return sheredPreferences.getInt("launchedGame", 0);
     }

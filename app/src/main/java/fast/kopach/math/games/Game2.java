@@ -9,9 +9,6 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.Random;
 
@@ -30,13 +27,12 @@ public class Game2 extends AppCompatActivity {
     Handler handler;
     Button variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6;
     private HeaderFragment headerFragment;
+    ReplayDialog replayDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game2);
-
-        PreferenceHelper.setLaunchedGame(2);
 
         random = new Random();
         tv2 = (TextView) findViewById(R.id.tv2);
@@ -52,6 +48,7 @@ public class Game2 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
+        replayDialog = new ReplayDialog();
     }
 
     private void buildGame() {
@@ -92,7 +89,7 @@ public class Game2 extends AppCompatActivity {
         buttonArray[trueBtn].setText(true_answer + "");
     }
 
-    public void onClickGame2(View view) {
+    public void onClickGame2(final View view) {
         final View view1 = view;
         if (Integer.parseInt(((Button) view).getText().toString()) == true_answer) {
             ((SquareButton) view).setColor(Color.GREEN);
@@ -110,7 +107,22 @@ public class Game2 extends AppCompatActivity {
                 }
             }, 500);
         } else {
-            Toast.makeText(this, "You are lose", Toast.LENGTH_SHORT).show();
+            ((SquareButton) view).setColor(Color.RED);
+            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+                @Override
+                void onReplayClick() {
+                    score = 0;
+                    headerFragment.setScore(score);
+                    replayDialog.dismiss();
+                    buildGame();
+                    ((SquareButton) view).setColor(Color.parseColor("#4775ba"));
+                }
+
+                @Override
+                void onBackClick() {
+                    finish();
+                }
+            });
         }
     }
 }

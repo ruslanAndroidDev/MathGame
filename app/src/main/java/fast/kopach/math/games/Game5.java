@@ -22,8 +22,6 @@ public class Game5 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game5);
 
-        PreferenceHelper.setLaunchedGame(5);
-
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
     }
 

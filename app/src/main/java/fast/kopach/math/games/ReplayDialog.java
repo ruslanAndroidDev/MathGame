@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -90,8 +91,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int score, String tag, ReplayListener listener) {
-        super.show(manager, tag);
+    public void show(FragmentManager manager, int score, ReplayListener listener) {
+        super.show(manager, "");
         this.listener = listener;
         this.score = score;
     }
@@ -106,7 +107,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 listener.onReplayClick();
                 break;
             case R.id.replay_setting:
-                listener.onSettingClick();
                 break;
         }
     }
@@ -115,7 +115,5 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
-
-        abstract void onSettingClick();
     }
 }

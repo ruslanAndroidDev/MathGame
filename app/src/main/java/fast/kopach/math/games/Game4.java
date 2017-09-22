@@ -1,14 +1,11 @@
 package fast.kopach.math.games;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,13 +27,12 @@ public class Game4 extends AppCompatActivity {
     Handler handler;
     private int score = 0;
     private int bestScore;
+    ReplayDialog replayDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game4);
-
-        PreferenceHelper.setLaunchedGame(4);
 
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         bestScore = PreferenceHelper.getBestScoreGame(4, this);
@@ -74,6 +70,7 @@ public class Game4 extends AppCompatActivity {
                 btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24};
         values = new ArrayList<>();
         valuesForCheck = new ArrayList<>();
+        replayDialog = new ReplayDialog();
         buildGame();
     }
 
@@ -88,7 +85,7 @@ public class Game4 extends AppCompatActivity {
         }
     }
 
-    private void checkIsTrueAnswer(SquareButton clickedBtn) {
+    private void checkIsTrueAnswer(final SquareButton clickedBtn) {
         if (valuesForCheck.get(0) == Integer.parseInt(clickedBtn.getText().toString())) {
             valuesForCheck.remove(0);
             clickedBtn.setSelected(true);
@@ -113,9 +110,21 @@ public class Game4 extends AppCompatActivity {
             }
         } else {
             clickedBtn.setColor(Color.RED);
-           // ReplayActivity replayActivity = new ReplayActivity();
-           // replayActivity.show(getFragmentManager(), "");
-//            findTrueButton();
+            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+                @Override
+                void onReplayClick() {
+                    score = 0;
+                    headerFragment.setScore(score);
+                    buildGame();
+                    paintAllButtonStandart();
+                    replayDialog.dismiss();
+                }
+
+                @Override
+                void onBackClick() {
+                    finish();
+                }
+            });
         }
     }
 
@@ -129,6 +138,7 @@ public class Game4 extends AppCompatActivity {
     public void paintAllButtonStandart() {
         for (int i = 0; i < num_of_btn; i++) {
             buttonsArray[i].setClickable(true);
+            buttonsArray[i].setSelected(false);
             buttonsArray[i].setColor(Color.parseColor("#4775ba"));
         }
     }
@@ -145,6 +155,7 @@ public class Game4 extends AppCompatActivity {
             values.add(new Random().nextInt(maxValue));
         }
         checkIsUnique();
+        valuesForCheck.clear();
         for (int i = 0; i < num_of_btn; i++) {
             valuesForCheck.add(values.get(i));
         }

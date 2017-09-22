@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.customView.SquareButton;
 
 public class Game3 extends AppCompatActivity {
 
@@ -29,6 +31,7 @@ public class Game3 extends AppCompatActivity {
     int mark;
     private int myScore = 0;
     int bestScore;
+    ReplayDialog replayDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,9 @@ public class Game3 extends AppCompatActivity {
         mark_left = (TextView) findViewById(R.id.tv_znak_left);
         bestScore = PreferenceHelper.getBestScoreGame(3, this);
         headerFragment.setBestScore(bestScore);
+        replayDialog = new ReplayDialog();
 
         buildGame();
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
     }
 
     private void buildGame() {
@@ -84,7 +86,7 @@ public class Game3 extends AppCompatActivity {
                     myScore++;
                     buildGame();
                 } else {
-//                    TODO show replay
+                    showReplay(view);
                 }
                 break;
             case "=":
@@ -92,7 +94,7 @@ public class Game3 extends AppCompatActivity {
                     buildGame();
                     myScore++;
                 } else {
-//                    TODO show replay
+                    showReplay(view);
                 }
                 break;
             case ">":
@@ -100,7 +102,7 @@ public class Game3 extends AppCompatActivity {
                     buildGame();
                     myScore++;
                 } else {
-//                    TODO show replay
+                    showReplay(view);
                 }
                 break;
         }
@@ -110,5 +112,24 @@ public class Game3 extends AppCompatActivity {
             headerFragment.setBestScore(bestScore);
         }
         headerFragment.setScore(myScore);
+    }
+
+    private void showReplay(final View view) {
+        ((SquareButton) view).setBackgroundColor(Color.RED);
+        replayDialog.show(getFragmentManager(), myScore, new ReplayDialog.ReplayListener() {
+            @Override
+            void onReplayClick() {
+                myScore = 0;
+                headerFragment.setScore(myScore);
+                buildGame();
+                ((SquareButton) view).setBackgroundColor(Color.parseColor("#4775ba"));
+                replayDialog.dismiss();
+            }
+
+            @Override
+            void onBackClick() {
+                finish();
+            }
+        });
     }
 }

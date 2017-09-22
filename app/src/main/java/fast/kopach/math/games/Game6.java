@@ -1,6 +1,5 @@
 package fast.kopach.math.games;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,12 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.ads.MobileAds;
-
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.customView.SquareButton;
 
 public class Game6 extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4, btn5;
@@ -25,14 +23,13 @@ public class Game6 extends AppCompatActivity {
     Button trueBtn;
     Handler handler;
     private HeaderFragment headerFragment;
+    ReplayDialog replayDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game6);
-
-        PreferenceHelper.setLaunchedGame(6);
 
         btn1 = (Button) findViewById(R.id.game6_btn1);
         btn2 = (Button) findViewById(R.id.game6_btn2);
@@ -45,6 +42,7 @@ public class Game6 extends AppCompatActivity {
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
         handler = new Handler();
+        replayDialog = new ReplayDialog();
         buildGame();
     }
 
@@ -66,7 +64,21 @@ public class Game6 extends AppCompatActivity {
             }, 500);
         } else {
             view.setBackgroundColor(Color.RED);
-           // replayDialog.show(getFragmentManager(), "");
+            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+                @Override
+                void onReplayClick() {
+                    score = 0;
+                    headerFragment.setScore(0);
+                    buildGame();
+                    view.setBackgroundColor(Color.parseColor("#4370c2"));
+                    replayDialog.dismiss();
+                }
+
+                @Override
+                void onBackClick() {
+                    finish();
+                }
+            });
         }
     }
 
