@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,9 +22,13 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import fast.kopach.math.R;
+import fast.kopach.math.menu.MenuActivity;
 
 /**
  * Created by Руслан on 16.09.2017.
@@ -35,6 +41,9 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     ImageView setting;
     private int score;
     TextView scoreTv;
+
+    private InterstitialAd mInterstitialAd;
+    CountDownTimer timer;
 
     public ReplayDialog() {
     }
@@ -50,13 +59,32 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d("tag", "onCreate");
         // Use the Builder class for convenient dialog construction
+
+        MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
+
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        timer = new CountDownTimer(6000, 1000) {
+            public void onTick(long otschetdofinisha) {
+
+            }
+
+            public void onFinish() {
+                interstitialAdShow();
+
+            }
+        }.start();
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
 
-        final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
+      /*  final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -75,7 +103,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 });
                 parentLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
             }
-        });
+        });  */
 
         replay = (ImageView) v.findViewById(R.id.replay_replay);
         replay.setOnClickListener(this);
@@ -115,5 +143,13 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
+    }
+
+    public void interstitialAdShow(){
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            timer.start();
+        }
     }
 }

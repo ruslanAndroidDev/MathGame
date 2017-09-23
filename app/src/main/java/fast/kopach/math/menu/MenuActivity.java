@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -24,19 +25,31 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     RewardedVideoAd rewardedVideoAd;
 
+    private AdView mAdView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(getApplicationContext(), "");
+
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         rewardedVideoAd.setRewardedVideoAdListener(this);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
 
-      //  loadRewardedVideoAd();
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
+
+       // mAdView = (AdView) findViewById(R.id.bannerAdView1);
+       // AdRequest adRequest = new AdRequest.Builder().build();
+       // mAdView.loadAd(adRequest);
+
+
+        //  loadRewardedVideoAd();
     }
 
     private void loadRewardedVideoAd() {
