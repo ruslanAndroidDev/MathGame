@@ -11,6 +11,8 @@ public class PreferenceHelper {
     static String PREFERENCE_NAME = "fastMathPref";
     static SharedPreferences sheredPreferences;
 
+    public static String launchedGame;
+
     public static int getBestScoreGame(int game, Context context) {
         if (sheredPreferences == null) {
             sheredPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);

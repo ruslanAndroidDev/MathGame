@@ -11,6 +11,7 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.customView.SquareButton;
 
 public class Game6 extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4, btn5;
@@ -41,7 +42,7 @@ public class Game6 extends AppCompatActivity {
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
         handler = new Handler();
-        replayDialog = new ReplayDialog(this, 6);
+        replayDialog = new ReplayDialog();
         buildGame();
     }
 
@@ -63,7 +64,7 @@ public class Game6 extends AppCompatActivity {
             }, 500);
         } else {
             view.setBackgroundColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, bestScore, new ReplayDialog.ReplayListener() {
+            replayDialog.show(getFragmentManager(),bestScore, score, new ReplayDialog.ReplayListener() {
                 @Override
                 void onReplayClick() {
                     score = 0;

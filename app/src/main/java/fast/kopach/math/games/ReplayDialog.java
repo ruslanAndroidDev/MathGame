@@ -5,7 +5,9 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,14 +18,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Random;
 
+import fast.kopach.math.Calculation;
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
 /**
@@ -36,8 +42,11 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     ImageView back;
     ImageView setting;
     private int score;
-    TextView scoreTv;
+    private int bestScore;
+    TextView scoreTv, textScoreTV, textToProgressBarTV;
     Random random;
+    RoundCornerProgressBar progress1;
+
     private InterstitialAd mInterstitialAd;
     Context context;
     int game;
@@ -60,11 +69,39 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Log.d("tag", "onCreate");
+        // Use the Builder class for convenient dialog construction
+
+        MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        timer = new CountDownTimer(6000, 1000) {
+            public void onTick(long otschetdofinisha) {}
+            public void onFinish() {
+                mInterstitialAdShow();
+            }
+        }.start();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
+
+        final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
+
+        progress1 = (RoundCornerProgressBar) v.findViewById(R.id.roundCornerProgressBar);
+        progress1.setProgressColor(Color.parseColor("#ed3b27"));
+        progress1.setProgressBackgroundColor(Color.parseColor("#808080"));
+        progress1.setMax(1);
+        progress1.setProgress(0);
+
+       // int progressColor = progress1.getProgressColor();
+       // int backgroundColor = progress1.getProgressBackgroundColor();
+       // int max = (int) progress1.getMax();
+       // int progress = (int) progress1.getProgress();
 
         final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -102,16 +139,21 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         setting.setOnClickListener(this);
 
         scoreTv = (TextView) v.findViewById(R.id.replay_score_tv);
+       // textScoreTV = (TextView) v.findViewById(R.id.replay_text_score);
+        textToProgressBarTV = (TextView) v.findViewById(R.id.replay_text_progress_bar);
         scoreTv.setText("" + score);
+        textToProgressBarTV.setText(bestScore+"/"+Calculation.getScoreBoundaryPoint(bestScore));
         builder.setCancelable(false);
         setCancelable(false);
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int score, int bestScore, ReplayListener listener) {
+    public void show(FragmentManager manager, int bestScore, int score, ReplayListener listener) {
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
+        progress1.setMax(Calculation.getScoreBoundaryPoint(bestScore));
+        progress1.setProgress(bestScore);
         this.bestScore = bestScore;
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
@@ -140,5 +182,13 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
+    }
+
+    public void interstitialAdShow(){
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+          //  timer.start();
+        }
     }
 }

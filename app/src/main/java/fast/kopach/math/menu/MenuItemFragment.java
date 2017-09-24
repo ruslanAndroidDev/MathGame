@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.Utill;
 import fast.kopach.math.games.Game1;
@@ -72,21 +73,27 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
         switch (position) {
             case 1:
                 intent.setClass(getContext(), Game1.class);
+                PreferenceHelper.launchedGame = "game 1";
                 break;
             case 2:
                 intent.setClass(getContext(), Game2.class);
+                PreferenceHelper.launchedGame = "game 2";
                 break;
             case 3:
                 intent.setClass(getContext(), Game3.class);
+                PreferenceHelper.launchedGame = "game 3";
                 break;
             case 4:
                 intent.setClass(getContext(), Game4.class);
+                PreferenceHelper.launchedGame = "game 4";
                 break;
             case 5:
                 intent.setClass(getContext(), Game5.class);
+                PreferenceHelper.launchedGame = "game 5";
                 break;
             case 6:
                 intent.setClass(getContext(), Game6.class);
+                PreferenceHelper.launchedGame = "game 6";
                 break;
         }
         startActivity(intent);

@@ -48,7 +48,7 @@ public class Game2 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
-        replayDialog = new ReplayDialog(this, 2);
+        replayDialog = new ReplayDialog();
     }
 
     private void buildGame() {
@@ -108,7 +108,7 @@ public class Game2 extends AppCompatActivity {
             }, 500);
         } else {
             ((SquareButton) view).setColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, bestScore, new ReplayDialog.ReplayListener() {
+            replayDialog.show(getFragmentManager(),bestScore, score, new ReplayDialog.ReplayListener() {
                 @Override
                 void onReplayClick() {
                     score = 0;

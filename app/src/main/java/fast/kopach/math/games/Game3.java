@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
@@ -43,7 +45,7 @@ public class Game3 extends AppCompatActivity {
         mark_left = (TextView) findViewById(R.id.tv_znak_left);
         bestScore = PreferenceHelper.getBestScoreGame(3, this);
         headerFragment.setBestScore(bestScore);
-        replayDialog = new ReplayDialog(this, 3);
+        replayDialog = new ReplayDialog();
 
         buildGame();
     }
@@ -114,7 +116,7 @@ public class Game3 extends AppCompatActivity {
 
     private void showReplay(final View view) {
         ((SquareButton) view).setBackgroundColor(Color.RED);
-        replayDialog.show(getFragmentManager(), myScore, bestScore, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(),bestScore, myScore, new ReplayDialog.ReplayListener() {
             @Override
             void onReplayClick() {
                 myScore = 0;
