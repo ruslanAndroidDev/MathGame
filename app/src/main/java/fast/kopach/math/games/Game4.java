@@ -70,7 +70,7 @@ public class Game4 extends AppCompatActivity {
                 btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24};
         values = new ArrayList<>();
         valuesForCheck = new ArrayList<>();
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this, 4);
         buildGame();
     }
 
@@ -110,7 +110,7 @@ public class Game4 extends AppCompatActivity {
             }
         } else {
             clickedBtn.setColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+            replayDialog.show(getFragmentManager(), score, bestScore, new ReplayDialog.ReplayListener() {
                 @Override
                 void onReplayClick() {
                     score = 0;

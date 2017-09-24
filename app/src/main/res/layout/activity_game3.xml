@@ -113,7 +113,7 @@
             android:onClick="game3Click"
             android:text="&lt;"
             android:textColor="#FFF"
-            android:textSize="42sp" />
+            android:textSize="48sp" />
 
         <fast.kopach.math.customView.SquareButton
             android:id="@+id/game3_btn_equals"
@@ -125,7 +125,7 @@
             android:onClick="game3Click"
             android:text="="
             android:textColor="#FFF"
-            android:textSize="42sp" />
+            android:textSize="48sp" />
 
         <fast.kopach.math.customView.SquareButton
             android:id="@+id/game3_btn_bigger"
@@ -137,7 +137,7 @@
             android:onClick="game3Click"
             android:text="&gt;"
             android:textColor="#FFF"
-            android:textSize="42sp" />
+            android:textSize="48sp" />
     </LinearLayout>
 
 </RelativeLayout>

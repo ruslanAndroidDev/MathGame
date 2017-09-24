@@ -26,8 +26,4 @@ public class PreferenceHelper {
         editor.putInt("bestScore" + game, bestScore);
         editor.commit();
     }
-
-    public int getLaunchedGame(){
-        return sheredPreferences.getInt("launchedGame", 0);
-    }
 }

@@ -40,7 +40,7 @@ public class Game1 extends AppCompatActivity {
         bestScore = PreferenceHelper.getBestScoreGame(1, this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this,1);
 
         buildGame();
 
@@ -77,7 +77,7 @@ public class Game1 extends AppCompatActivity {
                 headerFragment.setScore(score);
                 buildGame();
             } else {
-                replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+                replayDialog.show(getFragmentManager(), score,bestScore, new ReplayDialog.ReplayListener() {
                     @Override
                     void onReplayClick() {
                         replayDialog.dismiss();

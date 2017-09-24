@@ -1,14 +1,11 @@
 package fast.kopach.math.games;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -22,13 +19,12 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
 
+import java.util.Random;
+
 import fast.kopach.math.R;
-import fast.kopach.math.menu.MenuActivity;
 
 /**
  * Created by Руслан on 16.09.2017.
@@ -41,11 +37,18 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     ImageView setting;
     private int score;
     TextView scoreTv;
-
+    Random random;
     private InterstitialAd mInterstitialAd;
-    CountDownTimer timer;
+    Context context;
+    int game;
+    private int bestScore;
 
-    public ReplayDialog() {
+    public ReplayDialog(final Context context, int game) {
+        this.context = context;
+        this.game = game;
+        mInterstitialAd = new InterstitialAd(context);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
+        random = new Random();
     }
 
     public static float convertPixelsToDp(float px, Context context) {
@@ -57,53 +60,39 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.d("tag", "onCreate");
-        // Use the Builder class for convenient dialog construction
-
-        MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
-
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        timer = new CountDownTimer(6000, 1000) {
-            public void onTick(long otschetdofinisha) {
-
-            }
-
-            public void onFinish() {
-                interstitialAdShow();
-
-            }
-        }.start();
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
 
-      /*  final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
+        final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 //дізнаємося ширину dialog і показуємо рекламу
-                adView.setAdSize(new AdSize((int) convertPixelsToDp(parentLayout.getWidth(), getActivity()), 80));
-                adView.setAdUnitId(getString(R.string.nativeAdView1));
-                AdRequest request = new AdRequest.Builder().build();
-                adView.loadAd(request);
-                adView.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdLoaded() {
-                        super.onAdLoaded();
-                        Log.d("tag", "AdLoaded");
-                        ((LinearLayout) parentLayout).addView(adView);
-                    }
-                });
+                int width = (int) convertPixelsToDp(parentLayout.getWidth(), getActivity());
                 parentLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                if (width > 280) {
+                    Log.d("tag", "width>280");
+                    adView.setAdSize(new AdSize(width, 80));
+                    adView.setAdUnitId(getString(R.string.nativeAdView1));
+                    AdRequest request = new AdRequest.Builder().build();
+                    adView.loadAd(request);
+                    adView.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdLoaded() {
+                            super.onAdLoaded();
+                            ((LinearLayout) parentLayout).addView(adView);
+                        }
+                    });
+                } else {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+                }
             }
-        });  */
+        });
 
         replay = (ImageView) v.findViewById(R.id.replay_replay);
         replay.setOnClickListener(this);
@@ -119,10 +108,14 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int score, ReplayListener listener) {
+    public void show(FragmentManager manager, int score, int bestScore, ReplayListener listener) {
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
+        this.bestScore = bestScore;
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 
     @Override
@@ -132,6 +125,10 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 listener.onBackClick();
                 break;
             case R.id.replay_replay:
+                if (random.nextInt(4) == 0) {
+                    Log.d("tag", "random=4");
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                }
                 listener.onReplayClick();
                 break;
             case R.id.replay_setting:
@@ -143,13 +140,5 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
-    }
-
-    public void interstitialAdShow(){
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-            timer.start();
-        }
     }
 }
