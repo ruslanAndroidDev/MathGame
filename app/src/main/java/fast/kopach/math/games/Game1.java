@@ -1,5 +1,7 @@
 package fast.kopach.math.games;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +42,7 @@ public class Game1 extends AppCompatActivity {
         bestScore = PreferenceHelper.getBestScoreGame(1, this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this);
 
         buildGame();
 

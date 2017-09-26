@@ -25,7 +25,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
-
 import java.util.Random;
 
 import fast.kopach.math.Calculation;
@@ -50,9 +49,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     private InterstitialAd mInterstitialAd;
     Context context;
     int game;
-    private int bestScore;
 
-    public ReplayDialog(final Context context, int game) {
+    public ReplayDialog(final Context context) {
         this.context = context;
         this.game = game;
         mInterstitialAd = new InterstitialAd(context);
@@ -77,20 +75,11 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        timer = new CountDownTimer(6000, 1000) {
-            public void onTick(long otschetdofinisha) {}
-            public void onFinish() {
-                mInterstitialAdShow();
-            }
-        }.start();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
-
-        final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
 
         progress1 = (RoundCornerProgressBar) v.findViewById(R.id.roundCornerProgressBar);
         progress1.setProgressColor(Color.parseColor("#ed3b27"));
@@ -98,10 +87,10 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         progress1.setMax(1);
         progress1.setProgress(0);
 
-       // int progressColor = progress1.getProgressColor();
-       // int backgroundColor = progress1.getProgressBackgroundColor();
-       // int max = (int) progress1.getMax();
-       // int progress = (int) progress1.getProgress();
+        int progressColor = progress1.getProgressColor();
+        int backgroundColor = progress1.getProgressBackgroundColor();
+        int max = (int) progress1.getMax();
+        int progress = (int) progress1.getProgress();
 
         final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

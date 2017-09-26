@@ -48,7 +48,7 @@ public class Game2 extends AppCompatActivity {
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this);
     }
 
     private void buildGame() {

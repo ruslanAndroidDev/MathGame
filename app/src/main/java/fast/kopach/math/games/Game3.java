@@ -45,7 +45,7 @@ public class Game3 extends AppCompatActivity {
         mark_left = (TextView) findViewById(R.id.tv_znak_left);
         bestScore = PreferenceHelper.getBestScoreGame(3, this);
         headerFragment.setBestScore(bestScore);
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this);
 
         buildGame();
     }

@@ -42,7 +42,7 @@ public class Game6 extends AppCompatActivity {
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
         handler = new Handler();
-        replayDialog = new ReplayDialog();
+        replayDialog = new ReplayDialog(this);
         buildGame();
     }
 
