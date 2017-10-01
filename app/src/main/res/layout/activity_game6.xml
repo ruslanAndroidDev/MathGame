@@ -26,7 +26,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginBottom="30dp"
-            android:background="#4370c2"
+            android:background="@drawable/rounded_btn"
             android:onClick="game6Click"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="32sp"
@@ -37,12 +37,12 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginBottom="30dp"
-            android:background="#4370c2"
+            android:background="@drawable/rounded_btn"
             android:onClick="game6Click"
             android:id="@+id/game6_btn2"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="32sp"
-            android:textColor="#FFF"/>
+            android:textColor="#FFF" />
 
         <Button
             android:id="@+id/game6_btn3"
@@ -50,7 +50,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginBottom="30dp"
-            android:background="#4370c2"
+            android:background="@drawable/rounded_btn"
             android:onClick="game6Click"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="32sp"
@@ -62,7 +62,7 @@
             android:layout_weight="1"
             android:id="@+id/game6_btn4"
             android:layout_marginBottom="30dp"
-            android:background="#4370c2"
+            android:background="@drawable/rounded_btn"
             android:onClick="game6Click"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="32sp"
@@ -75,7 +75,7 @@
             android:onClick="game6Click"
             android:id="@+id/game6_btn5"
             android:layout_marginBottom="30dp"
-            android:background="#4370c2"
+            android:background="@drawable/rounded_btn"
             android:gravity="center_vertical|center_horizontal"
             android:textSize="32sp"
             android:textColor="#FFF"/>
