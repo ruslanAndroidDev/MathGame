@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.util.DisplayMetrics;
 
 /**
  * Created by Руслан on 11.09.2017.
@@ -55,6 +56,13 @@ public class Utill {
         bitmap = BitmapFactory.decodeResource(res, resId, options);
 
         return bitmap;
+    }
+
+    public static float convertPixelsToDp(float px, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        float dp = px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return dp;
     }
 
     public static void playSound(Context context) {

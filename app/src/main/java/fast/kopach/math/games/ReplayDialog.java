@@ -30,6 +30,7 @@ import java.util.Random;
 import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.Utill;
 
 /**
  * Created by Руслан on 16.09.2017.
@@ -46,6 +47,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     Random random;
     RoundCornerProgressBar progress1;
 
+    boolean isLoadInterstialAd=false;
+
     private InterstitialAd mInterstitialAd;
     Context context;
 
@@ -56,23 +59,13 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         random = new Random();
     }
 
-    public static float convertPixelsToDp(float px, Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        float dp = px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return dp;
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.d("tag", "onCreate");
-        // Use the Builder class for convenient dialog construction
 
         bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame);
 
         MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -91,7 +84,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
             @Override
             public void onGlobalLayout() {
                 //дізнаємося ширину dialog і показуємо рекламу
-                int width = (int) convertPixelsToDp(parentLayout.getWidth(), getActivity());
+                int width = (int) Utill.convertPixelsToDp(parentLayout.getWidth(), getActivity());
                 parentLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 if (width > 280) {
                     Log.d("tag", "width>280");
@@ -107,6 +100,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                         }
                     });
                 } else {
+                    isLoadInterstialAd = true;
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                     }
@@ -149,7 +143,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 listener.onBackClick();
                 break;
             case R.id.replay_replay:
-                if (random.nextInt(4) == 0) {
+                if (isLoadInterstialAd & random.nextInt(4) == 0) {
                     Log.d("tag", "random=4");
                     mInterstitialAd.loadAd(new AdRequest.Builder().build());
                 }

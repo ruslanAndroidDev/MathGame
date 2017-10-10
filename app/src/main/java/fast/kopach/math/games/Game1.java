@@ -1,8 +1,5 @@
 package fast.kopach.math.games;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +12,6 @@ import java.util.Random;
 import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
-import fast.kopach.math.menu.MenuActivity;
 
 public class Game1 extends AppCompatActivity {
     TextView textView;
@@ -50,7 +46,13 @@ public class Game1 extends AppCompatActivity {
 
     public void numberClick(View view) {
         TextView onClickedTv = (TextView) view;
-        myAnswer += onClickedTv.getText().toString();
+        if (((TextView) view).getText().toString().equals("-")) {
+            if (!myAnswer.contains("-")) {
+                myAnswer += onClickedTv.getText().toString();
+            }
+        } else {
+            myAnswer += onClickedTv.getText().toString();
+        }
         textView.setText(textPryklad + myAnswer);
     }
 
@@ -68,7 +70,7 @@ public class Game1 extends AppCompatActivity {
     }
 
     private void checkAnswer() {
-        if (!myAnswer.equals("")) {
+        if (!myAnswer.equals("") & !myAnswer.equals("-")) {
             if (Integer.parseInt(myAnswer) == result) {
                 score += 1;
                 if (score > bestScore) {
