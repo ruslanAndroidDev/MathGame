@@ -73,27 +73,27 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
         switch (position) {
             case 1:
                 intent.setClass(getContext(), Game1.class);
-                PreferenceHelper.launchedGame = "game 1";
+                PreferenceHelper.launchedGame = 1;
                 break;
             case 2:
                 intent.setClass(getContext(), Game2.class);
-                PreferenceHelper.launchedGame = "game 2";
+                PreferenceHelper.launchedGame = 2;
                 break;
             case 3:
                 intent.setClass(getContext(), Game3.class);
-                PreferenceHelper.launchedGame = "game 3";
+                PreferenceHelper.launchedGame = 3;
                 break;
             case 4:
                 intent.setClass(getContext(), Game4.class);
-                PreferenceHelper.launchedGame = "game 4";
+                PreferenceHelper.launchedGame = 4;
                 break;
             case 5:
                 intent.setClass(getContext(), Game5.class);
-                PreferenceHelper.launchedGame = "game 5";
+                PreferenceHelper.launchedGame = 5;
                 break;
             case 6:
                 intent.setClass(getContext(), Game6.class);
-                PreferenceHelper.launchedGame = "game 6";
+                PreferenceHelper.launchedGame = 6;
                 break;
         }
         startActivity(intent);

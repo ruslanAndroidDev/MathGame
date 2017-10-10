@@ -43,7 +43,7 @@ public class Game3 extends AppCompatActivity {
         example_right = (TextView) findViewById(R.id.example_right);
         mark_right = (TextView) findViewById(R.id.tv_znak_right);
         mark_left = (TextView) findViewById(R.id.tv_znak_left);
-        bestScore = PreferenceHelper.getBestScoreGame(3, this);
+        bestScore = PreferenceHelper.getBestScoreGame(3);
         headerFragment.setBestScore(bestScore);
         replayDialog = new ReplayDialog(this);
 
@@ -108,7 +108,7 @@ public class Game3 extends AppCompatActivity {
         }
         if (myScore > bestScore) {
             bestScore = myScore;
-            PreferenceHelper.writeBestScoreGame(3, bestScore, this);
+            PreferenceHelper.writeBestScoreGame(3, bestScore);
             headerFragment.setBestScore(bestScore);
         }
         headerFragment.setScore(myScore);
@@ -116,7 +116,7 @@ public class Game3 extends AppCompatActivity {
 
     private void showReplay(final View view) {
         ((SquareButton) view).setBackgroundColor(Color.RED);
-        replayDialog.show(getFragmentManager(),bestScore, myScore, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), myScore, new ReplayDialog.ReplayListener() {
             @Override
             void onReplayClick() {
                 myScore = 0;

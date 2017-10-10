@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -13,6 +14,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
 /**
@@ -22,6 +24,7 @@ import fast.kopach.math.R;
 public class MenuActivity extends AppCompatActivity implements RewardedVideoAdListener{
     ViewPager viewPager;
     MenuAdapter adapter;
+    TextView tv_coin;
 
     RewardedVideoAd rewardedVideoAd;
 
@@ -32,15 +35,18 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PreferenceHelper.firstGameRun(this);
+
         MobileAds.initialize(getApplicationContext(), "");
 
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
+        tv_coin = (TextView) findViewById(R.id.tv_coin);
+
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         rewardedVideoAd.setRewardedVideoAdListener(this);
-
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
 
@@ -103,13 +109,14 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onResume() {
         rewardedVideoAd.resume(this);
+        tv_coin.setText(""+PreferenceHelper.getCoin());
         super.onResume();
     }
 
     @Override
     public void onPause() {
         rewardedVideoAd.pause(this);
-       // showRewardedVideoAd();
+        // showRewardedVideoAd();
         super.onPause();
     }
 

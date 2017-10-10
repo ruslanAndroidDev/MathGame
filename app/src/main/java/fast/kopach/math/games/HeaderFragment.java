@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
 /**
@@ -26,6 +27,9 @@ public class HeaderFragment extends Fragment {
         View v = inflater.inflate(R.layout.score_element, container, false);
         best_score_tv = (TextView) v.findViewById(R.id.tv_bs);
         score_tv = (TextView) v.findViewById(R.id.tv_score);
+
+
+
         return v;
     }
 

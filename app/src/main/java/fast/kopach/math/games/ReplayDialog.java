@@ -68,6 +68,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         Log.d("tag", "onCreate");
         // Use the Builder class for convenient dialog construction
 
+        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame);
+
         MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
@@ -129,11 +131,12 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int bestScore, int score, ReplayListener listener) {
+    public void show(FragmentManager manager, int score, ReplayListener listener) {
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
-        this.bestScore = bestScore;
+       // this.bestScore = bestScore;
+
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }

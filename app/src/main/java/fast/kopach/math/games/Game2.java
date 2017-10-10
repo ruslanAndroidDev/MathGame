@@ -44,7 +44,7 @@ public class Game2 extends AppCompatActivity {
         variantbtn6 = (Button) findViewById(R.id.btn6);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         buttonArray = new Button[]{variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6};
-        bestScore = PreferenceHelper.getBestScoreGame(2, this);
+        bestScore = PreferenceHelper.getBestScoreGame(2);
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
@@ -96,7 +96,7 @@ public class Game2 extends AppCompatActivity {
             score += 1;
             if (score > bestScore) {
                 bestScore = score;
-                PreferenceHelper.writeBestScoreGame(2, bestScore, this);
+                PreferenceHelper.writeBestScoreGame(2, bestScore);
                 headerFragment.setBestScore(bestScore);
             }
             headerFragment.setScore(score);
@@ -108,7 +108,7 @@ public class Game2 extends AppCompatActivity {
             }, 500);
         } else {
             ((SquareButton) view).setColor(Color.RED);
-            replayDialog.show(getFragmentManager(),bestScore, score, new ReplayDialog.ReplayListener() {
+            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
                 @Override
                 void onReplayClick() {
                     score = 0;

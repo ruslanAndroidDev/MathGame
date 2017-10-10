@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.menu.MenuActivity;
@@ -29,7 +30,6 @@ public class Game1 extends AppCompatActivity {
     HeaderFragment headerFragment;
     Handler handler;
     ReplayDialog replayDialog;
-    // PreferenceHelper preferenceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class Game1 extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
-        bestScore = PreferenceHelper.getBestScoreGame(1, this);
+        bestScore = PreferenceHelper.getBestScoreGame(1);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
         replayDialog = new ReplayDialog(this);
@@ -73,13 +73,14 @@ public class Game1 extends AppCompatActivity {
                 score += 1;
                 if (score > bestScore) {
                     bestScore = score;
-                    PreferenceHelper.writeBestScoreGame(1, bestScore, this);
+                    PreferenceHelper.writeBestScoreGame(1, bestScore);
                     headerFragment.setBestScore(bestScore);
                 }
                 headerFragment.setScore(score);
                 buildGame();
             } else {
-                replayDialog.show(getFragmentManager(), bestScore, score, new ReplayDialog.ReplayListener() {
+
+                replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
                     @Override
                     void onReplayClick() {
                         replayDialog.dismiss();
@@ -104,8 +105,8 @@ public class Game1 extends AppCompatActivity {
 
         myAnswer = "";
 
-        min_value = 50 + score * 15;
-        max_value = 70 + score * 15;
+        min_value = 20 + score * 15;
+        max_value = 80 + score * 15;
         int number_1 = random.nextInt(max_value - min_value) + min_value;
         int number_2 = random.nextInt(max_value - min_value) + min_value;
 
@@ -121,6 +122,13 @@ public class Game1 extends AppCompatActivity {
                 break;
         }
         textView.setText(textPryklad);
+
+       // Calculation.startCalculation(PreferenceHelper.getBestScoreGame(1));
+
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
