@@ -11,7 +11,6 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
-import fast.kopach.math.customView.SquareButton;
 
 public class Game6 extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4, btn5;
@@ -64,27 +63,24 @@ public class Game6 extends AppCompatActivity {
             }, 500);
         } else {
             view.setBackgroundColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
-                @Override
-                void onReplayClick() {
-                    score = 0;
-                    headerFragment.setScore(0);
-                    buildGame();
+            showDialog();
+            handler.postDelayed(new Runnable() {
+                public void run() {
                     view.setBackgroundColor(Color.parseColor("#4370c2"));
-                    replayDialog.dismiss();
                 }
-
-                @Override
-                void onBackClick() {
-                    finish();
-                }
-            });
+            }, 500);
         }
     }
 
     private void buildGame() {
         fillAllVariantInFalse();
         setTrueVariant();
+        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+            @Override
+            public void onTimerFinish() {
+                showDialog();
+            }
+        });
     }
 
     private void setTrueVariant() {
@@ -117,5 +113,28 @@ public class Game6 extends AppCompatActivity {
             }
             buttons[i].setText(pryklad);
         }
+    }
+
+    void showDialog() {
+        replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+            @Override
+            public void onReplayClick() {
+                score = 0;
+                headerFragment.setScore(0);
+                buildGame();
+                replayDialog.dismiss();
+            }
+
+            @Override
+            public void onBackClick() {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        headerFragment.stopTimer();
     }
 }

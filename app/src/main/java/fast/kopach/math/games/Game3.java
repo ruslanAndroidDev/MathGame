@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.MobileAds;
-
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
@@ -32,6 +30,7 @@ public class Game3 extends AppCompatActivity {
     private int myScore = 0;
     int bestScore;
     ReplayDialog replayDialog;
+    SquareButton errorClickedBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,10 @@ public class Game3 extends AppCompatActivity {
     }
 
     private void buildGame() {
+        if (errorClickedBtn != null) {
+            errorClickedBtn
+                    .setBackgroundColor(Color.parseColor("#4775ba"));
+        }
         num1left = random.nextInt(30 + myScore * 5);
         num2left = random.nextInt(30 + myScore * 5);
         mark = random.nextInt(2);
@@ -75,7 +78,30 @@ public class Game3 extends AppCompatActivity {
             sum_right = num1Right - num2Right;
             mark_right.setText("-");
         }
+        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+            @Override
+            public void onTimerFinish() {
+                showDialog();
+            }
+        });
 
+    }
+
+    void showDialog() {
+        replayDialog.show(getFragmentManager(), myScore, new ReplayDialog.ReplayListener() {
+            @Override
+            public void onReplayClick() {
+                myScore = 0;
+                headerFragment.setScore(myScore);
+                buildGame();
+                replayDialog.dismiss();
+            }
+
+            @Override
+            public void onBackClick() {
+                finish();
+            }
+        });
     }
 
     public void game3Click(View view) {
@@ -115,21 +141,14 @@ public class Game3 extends AppCompatActivity {
     }
 
     private void showReplay(final View view) {
-        ((SquareButton) view).setBackgroundColor(Color.RED);
-        replayDialog.show(getFragmentManager(), myScore, new ReplayDialog.ReplayListener() {
-            @Override
-            void onReplayClick() {
-                myScore = 0;
-                headerFragment.setScore(myScore);
-                buildGame();
-                ((SquareButton) view).setBackgroundColor(Color.parseColor("#4775ba"));
-                replayDialog.dismiss();
-            }
+        errorClickedBtn = ((SquareButton) view);
+        errorClickedBtn.setBackgroundColor(Color.RED);
+        showDialog();
+    }
 
-            @Override
-            void onBackClick() {
-                finish();
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        headerFragment.stopTimer();
     }
 }

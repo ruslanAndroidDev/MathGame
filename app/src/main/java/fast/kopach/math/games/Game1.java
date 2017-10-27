@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
@@ -81,25 +80,29 @@ public class Game1 extends AppCompatActivity {
                 headerFragment.setScore(score);
                 buildGame();
             } else {
-
-                replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
-                    @Override
-                    void onReplayClick() {
-                        replayDialog.dismiss();
-                        score = 0;
-                        buildGame();
-                        headerFragment.setScore(score);
-                    }
-
-                    @Override
-                    void onBackClick() {
-                        finish();
-                    }
-                });
+                headerFragment.stopTimer();
+                showDialog();
             }
         } else {
             Toast.makeText(this, "Введіть відповідь!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    void showDialog() {
+        replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+            @Override
+            public void onReplayClick() {
+                replayDialog.dismiss();
+                score = 0;
+                buildGame();
+                headerFragment.setScore(score);
+            }
+
+            @Override
+            public void onBackClick() {
+                finish();
+            }
+        });
     }
 
     private void buildGame() {
@@ -124,13 +127,19 @@ public class Game1 extends AppCompatActivity {
                 break;
         }
         textView.setText(textPryklad);
+        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
 
-       // Calculation.startCalculation(PreferenceHelper.getBestScoreGame(1));
+            @Override
+            public void onTimerFinish() {
+                showDialog();
+            }
+        });
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        headerFragment.stopTimer();
     }
 }

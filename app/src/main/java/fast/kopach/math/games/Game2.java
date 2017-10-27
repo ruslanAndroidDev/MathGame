@@ -28,6 +28,7 @@ public class Game2 extends AppCompatActivity {
     Button variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6;
     private HeaderFragment headerFragment;
     ReplayDialog replayDialog;
+    SquareButton errorClickedBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class Game2 extends AppCompatActivity {
     }
 
     private void buildGame() {
+        if (errorClickedBtn != null) {
+            errorClickedBtn.setColor(Color.parseColor("#4775ba"));
+        }
         int propysk = 0;
         int number1 = random.nextInt(25) + score * 5;
         int number2 = random.nextInt(25) + score * 3;
@@ -77,6 +81,12 @@ public class Game2 extends AppCompatActivity {
                 break;
         }
         tv2.setText(Html.fromHtml(taskStr));
+        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+            @Override
+            public void onTimerFinish() {
+                showDialog();
+            }
+        });
         fillVariants();
     }
 
@@ -107,22 +117,32 @@ public class Game2 extends AppCompatActivity {
                 }
             }, 500);
         } else {
-            ((SquareButton) view).setColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
-                @Override
-                void onReplayClick() {
-                    score = 0;
-                    headerFragment.setScore(score);
-                    replayDialog.dismiss();
-                    buildGame();
-                    ((SquareButton) view).setColor(Color.parseColor("#4775ba"));
-                }
-
-                @Override
-                void onBackClick() {
-                    finish();
-                }
-            });
+            errorClickedBtn = (SquareButton) view;
+            errorClickedBtn.setColor(Color.RED);
+            showDialog();
         }
+    }
+
+    void showDialog() {
+        replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+            @Override
+            public void onReplayClick() {
+                score = 0;
+                headerFragment.setScore(score);
+                replayDialog.dismiss();
+                buildGame();
+            }
+
+            @Override
+            public void onBackClick() {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        headerFragment.stopTimer();
     }
 }

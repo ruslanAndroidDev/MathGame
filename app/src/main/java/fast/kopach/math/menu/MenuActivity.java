@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,13 +50,6 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         rewardedVideoAd.setRewardedVideoAdListener(this);
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
-
-       // mAdView = (AdView) findViewById(R.id.bannerAdView1);
-       // AdRequest adRequest = new AdRequest.Builder().build();
-       // mAdView.loadAd(adRequest);
-
-
-        //  loadRewardedVideoAd();
     }
 
     private void loadRewardedVideoAd() {
@@ -124,5 +118,11 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     public void onDestroy() {
         rewardedVideoAd.destroy(this);
         super.onDestroy();
+    }
+
+    public void onMenuButtonClick(View view) {
+        if (view.getId()==R.id.btn_exit){
+            finish();
+        }
     }
 }

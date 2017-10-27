@@ -154,7 +154,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         }
     }
 
-    static abstract class ReplayListener {
+    interface ReplayListener {
         abstract void onReplayClick();
 
         abstract void onBackClick();

@@ -13,8 +13,9 @@ import java.util.Random;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.customView.SquareButton;
+import fast.kopach.math.games.ReplayDialog.ReplayListener;
 
-public class Game4 extends AppCompatActivity {
+public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFragment.TimerListener {
     SquareButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16,
             btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24;
     SquareButton[] buttonsArray;
@@ -76,14 +77,9 @@ public class Game4 extends AppCompatActivity {
 
     private void buildGame() {
         generateValue();
-        fillButton();
+        headerFragment.startTimer(20, this);
     }
 
-    private void fillButton() {
-        for (int i = 0; i < 24; i++) {
-            buttonsArray[i].setText(values.get(i) + "");
-        }
-    }
 
     private void checkIsTrueAnswer(final SquareButton clickedBtn) {
         if (valuesForCheck.get(0) == Integer.parseInt(clickedBtn.getText().toString())) {
@@ -110,21 +106,7 @@ public class Game4 extends AppCompatActivity {
             }
         } else {
             clickedBtn.setColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
-                @Override
-                void onReplayClick() {
-                    score = 0;
-                    headerFragment.setScore(score);
-                    buildGame();
-                    paintAllButtonStandart();
-                    replayDialog.dismiss();
-                }
-
-                @Override
-                void onBackClick() {
-                    finish();
-                }
-            });
+            replayDialog.show(getFragmentManager(), score, this);
         }
     }
 
@@ -169,6 +151,10 @@ public class Game4 extends AppCompatActivity {
                 }
             }
         }
+
+        for (int i = 0; i < 24; i++) {
+            buttonsArray[i].setText(values.get(i) + "");
+        }
     }
 
     private void checkIsUnique() {
@@ -180,5 +166,30 @@ public class Game4 extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onReplayClick() {
+        score = 0;
+        headerFragment.setScore(score);
+        buildGame();
+        paintAllButtonStandart();
+        replayDialog.dismiss();
+    }
+
+    @Override
+    public void onBackClick() {
+        finish();
+    }
+
+    @Override
+    public void onTimerFinish() {
+        replayDialog.show(getFragmentManager(), score, this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        headerFragment.stopTimer();
     }
 }
