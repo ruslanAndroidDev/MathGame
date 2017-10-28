@@ -56,9 +56,9 @@ public class Game2 extends AppCompatActivity {
         if (errorClickedBtn != null) {
             errorClickedBtn.setColor(Color.parseColor("#4775ba"));
         }
-        int propysk = 0;
-        int number1 = random.nextInt(25) + score * 5;
-        int number2 = random.nextInt(25) + score * 3;
+        int propysk = random.nextInt(3);
+        int number1 = random.nextInt(25) + random.nextInt((score +1)* 5);
+        int number2 = random.nextInt(25) + random.nextInt((score +1)* 4);
         int znak = random.nextInt(2);
         switch (propysk) {
             case 0:  // пропуск в першого числа
@@ -74,10 +74,25 @@ public class Game2 extends AppCompatActivity {
 
             case 1:
                 true_answer = number2;
+                if (znak == 0) {
+                    int result = number1 + number2;
+                    taskStr = "<font color=#000000>" + number1 + " +</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
+                } else {
+                    int result = number1 - number2;
+                    taskStr = "<font color=#000000>" + number1 + " -</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
+                }
                 break;
 
             case 2:
-//                true_answer = result;
+                int result;
+                if (znak == 0) {
+                    result = number1 + number2;
+                    taskStr = "<font color=#000000>" + number1 + " + " + number2 + " =</font> <font color=#4000FF> ? </font>";
+                } else {
+                    result = number1 - number2;
+                    taskStr = "<font color=#000000>" + number1 + " - " + number2 + " =</font> <font color=#4000FF> ? </font>";
+                }
+                true_answer = result;
                 break;
         }
         tv2.setText(Html.fromHtml(taskStr));
@@ -92,7 +107,7 @@ public class Game2 extends AppCompatActivity {
 
     private void fillVariants() {
         for (int i = 0; i < 6; i++) {
-            buttonArray[i].setText(random.nextInt(50) + "");
+            buttonArray[i].setText(random.nextInt(25) + random.nextInt((score+1) * 5) + "");
         }
 
         int trueBtn = random.nextInt(6);
