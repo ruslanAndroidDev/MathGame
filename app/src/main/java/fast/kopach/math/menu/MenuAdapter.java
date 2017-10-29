@@ -1,5 +1,8 @@
 package fast.kopach.math.menu;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -21,7 +24,7 @@ public class MenuAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new MenuItemFragment(R.drawable.texture1s, "Game1",1);
             case 1:
-                return new MenuItemFragment(R.drawable.texture1s, "Game2",2);
+                return new MenuItemFragment(R.drawable.texture2, "Game2",2);
             case 2:
                 return new MenuItemFragment(R.drawable.texture3s, "Game3",3);
             case 3:

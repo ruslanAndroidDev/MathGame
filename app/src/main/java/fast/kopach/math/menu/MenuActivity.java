@@ -1,10 +1,16 @@
 package fast.kopach.math.menu;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +21,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import fast.kopach.math.AppEvaluationDialog;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 
@@ -37,8 +44,11 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         setContentView(R.layout.activity_main);
 
         PreferenceHelper.firstGameRun(this);
+        showDialog();
 
-        MobileAds.initialize(getApplicationContext(), "");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
+        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        rewardedVideoAd.setRewardedVideoAdListener(this);
 
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
@@ -46,10 +56,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         tv_coin = (TextView) findViewById(R.id.tv_coin);
 
-        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        rewardedVideoAd.setRewardedVideoAdListener(this);
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
+      //  loadRewardedVideoAd();
     }
 
     private void loadRewardedVideoAd() {
@@ -87,7 +94,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-
+        Toast.makeText(this, "Ви отримали " + rewardItem.getAmount()+ " " + rewardItem.getType(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -110,7 +117,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onPause() {
         rewardedVideoAd.pause(this);
-        // showRewardedVideoAd();
+      //  showRewardedVideoAd();
         super.onPause();
     }
 
@@ -124,5 +131,11 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         if (view.getId()==R.id.btn_exit){
             finish();
         }
+    }
+
+    public void showDialog() {
+
+        AppEvaluationDialog dialog = new AppEvaluationDialog();
+        dialog.show(getSupportFragmentManager(), "custom");
     }
 }
