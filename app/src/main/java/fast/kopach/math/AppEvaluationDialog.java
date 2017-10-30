@@ -25,6 +25,7 @@ public class AppEvaluationDialog extends DialogFragment {
         builder.setView(linearlayout);
 
         final RatingBar rating = (RatingBar)linearlayout.findViewById(R.id.ratingbar);
+        rating.setRating(0);
 
         builder.setPositiveButton("Rate it",
                 new DialogInterface.OnClickListener() {
@@ -52,44 +53,5 @@ public class AppEvaluationDialog extends DialogFragment {
                         });
 
         return builder.create();
-      /*  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        return builder
-                .setTitle("Диалоговое окно")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setView(R.layout.dialog)
-                .setPositiveButton("OK", null)
-                .setNegativeButton("Отмена", null)
-                .create(); */
     }
-
-   /* public void showRatingDialog(Activity Activity) {
-
-        final AlertDialog.Builder ratingdialog = new AlertDialog.Builder(Activity);
-
-        ratingdialog.setIcon(android.R.drawable.btn_star_big_on);
-        ratingdialog.setTitle("Голосуем за любимого кота!");
-
-        View linearlayout = getLayoutInflater().inflate(R.layout.dialog_app_evaluation, null);
-        ratingdialog.setView(linearlayout);
-
-        final RatingBar rating = (RatingBar)linearlayout.findViewById(R.id.ratingbar);
-
-        ratingdialog.setPositiveButton("Готово",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                      //  txtView.setText(String.valueOf(rating.getRating()));
-                        dialog.dismiss();
-                    }
-                })
-
-                .setNegativeButton("Отмена",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-        ratingdialog.create();
-        ratingdialog.show();  *?
-    } */
 }

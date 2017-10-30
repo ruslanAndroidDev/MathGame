@@ -4,12 +4,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +22,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
+
 import java.util.Random;
 
 import fast.kopach.math.Calculation;
@@ -47,7 +45,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     Random random;
     RoundCornerProgressBar progress1;
 
-    boolean isLoadInterstialAd=false;
+    boolean isLoadInterstialAd = false;
 
     private InterstitialAd mInterstitialAd;
     Context context;
@@ -63,9 +61,9 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame);
+        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame,getContext());
 
-        MobileAds.initialize(getActivity().getApplicationContext(),"ca-app-pub-8320045635693885~7488509104");
+        MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -116,10 +114,10 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         setting.setOnClickListener(this);
 
         scoreTv = (TextView) v.findViewById(R.id.replay_score_tv);
-       // textScoreTV = (TextView) v.findViewById(R.id.replay_text_score);
+        // textScoreTV = (TextView) v.findViewById(R.id.replay_text_score);
         textToProgressBarTV = (TextView) v.findViewById(R.id.replay_text_progress_bar);
         scoreTv.setText("" + score);
-        textToProgressBarTV.setText(bestScore+"/"+Calculation.getScoreBoundaryPoint(bestScore));
+        textToProgressBarTV.setText(bestScore + "/" + Calculation.getScoreBoundaryPoint(bestScore));
         builder.setCancelable(false);
         setCancelable(false);
         return builder.create();
@@ -129,7 +127,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
-       // this.bestScore = bestScore;
+        // this.bestScore = bestScore;
 
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
@@ -160,7 +158,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onBackClick();
     }
 
-    public void interstitialAdShow(){
+    public void interstitialAdShow() {
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }

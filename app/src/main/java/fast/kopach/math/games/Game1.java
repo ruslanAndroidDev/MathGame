@@ -34,7 +34,7 @@ public class Game1 extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
-        bestScore = PreferenceHelper.getBestScoreGame(1);
+        bestScore = PreferenceHelper.getBestScoreGame(1,this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
         replayDialog = new ReplayDialog(this);

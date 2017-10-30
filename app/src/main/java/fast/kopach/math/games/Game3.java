@@ -3,7 +3,6 @@ package fast.kopach.math.games;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,7 +41,7 @@ public class Game3 extends AppCompatActivity {
         example_right = (TextView) findViewById(R.id.example_right);
         mark_right = (TextView) findViewById(R.id.tv_znak_right);
         mark_left = (TextView) findViewById(R.id.tv_znak_left);
-        bestScore = PreferenceHelper.getBestScoreGame(3);
+        bestScore = PreferenceHelper.getBestScoreGame(3,this);
         headerFragment.setBestScore(bestScore);
         replayDialog = new ReplayDialog(this);
 
@@ -64,7 +63,6 @@ public class Game3 extends AppCompatActivity {
             sum_left = num1left - num2left;
             mark_left.setText("-");
         }
-        Log.d("tag", "LEFT" + num1left + mark_left.getText() + num2left + "=" + sum_left);
         example_left.setText(num1left + "\n" + num2left);
 
         int num1Right = random.nextInt(30 + myScore * 5);
@@ -105,7 +103,6 @@ public class Game3 extends AppCompatActivity {
     }
 
     public void game3Click(View view) {
-        Log.d("tag", "sumLeft" + sum_left + ",sumRight " + sum_right);
         switch (((Button) view).getText().toString()) {
             case "<":
                 if (sum_left < sum_right) {

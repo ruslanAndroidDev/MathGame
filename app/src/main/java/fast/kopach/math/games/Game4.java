@@ -36,7 +36,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
         setContentView(R.layout.activity_game4);
 
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
-        bestScore = PreferenceHelper.getBestScoreGame(4);
+        bestScore = PreferenceHelper.getBestScoreGame(4,this);
         headerFragment.setScore(score);
         headerFragment.setBestScore(bestScore);
 

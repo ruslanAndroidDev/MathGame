@@ -36,7 +36,7 @@ public class Game6 extends AppCompatActivity {
         btn4 = (Button) findViewById(R.id.game6_btn4);
         btn5 = (Button) findViewById(R.id.game6_btn5);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
-        bestScore = PreferenceHelper.getBestScoreGame(6);
+        bestScore = PreferenceHelper.getBestScoreGame(6, this);
         headerFragment.setBestScore(bestScore);
         buttons = new Button[]{btn1, btn2, btn3, btn4, btn5};
         random = new Random();
@@ -73,8 +73,8 @@ public class Game6 extends AppCompatActivity {
     }
 
     private void buildGame() {
-        fillAllVariantInFalse();
-        setTrueVariant();
+        fillAllVariantInTrue();
+        setFalseVariant();
         headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
             @Override
             public void onTimerFinish() {
@@ -83,33 +83,34 @@ public class Game6 extends AppCompatActivity {
         });
     }
 
-    private void setTrueVariant() {
+    private void setFalseVariant() {
         int answerBtn = random.nextInt(5);
         int num1 = random.nextInt(50) + score * 3;
         int num2 = random.nextInt(50) + score * 3;
         int znak = random.nextInt(2);
+        int result = random.nextInt(50) + score * 4;
         String trueAnswerStr;
         if (znak == 0) {
-            int result = num1 + num2;
             trueAnswerStr = num1 + "+" + num2 + "=" + result;
         } else {
-            int result = num1 - num2;
             trueAnswerStr = num1 + "-" + num2 + "=" + result;
         }
         buttons[answerBtn].setText(trueAnswerStr);
         trueBtn = buttons[answerBtn];
     }
 
-    private void fillAllVariantInFalse() {
+    private void fillAllVariantInTrue() {
         for (int i = 0; i < 5; i++) {
             int num1 = random.nextInt(50) + score * 3;
             int num2 = random.nextInt(50) + score * 3;
             int znak = random.nextInt(2);
-            int result = random.nextInt(150);
+            int result;
             if (znak == 0) {
+                result = num1 + num2;
                 pryklad = num1 + "+" + num2 + "=" + result;
             } else {
-                pryklad = num1 + "-" + num2 + "=-" + result;
+                result = num1 - num2;
+                pryklad = num1 + "-" + num2 + "=" + result;
             }
             buttons[i].setText(pryklad);
         }

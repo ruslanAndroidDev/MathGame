@@ -1,16 +1,10 @@
 package fast.kopach.math.menu;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +23,7 @@ import fast.kopach.math.R;
  * Created by Руслан on 11.09.2017.
  */
 
-public class MenuActivity extends AppCompatActivity implements RewardedVideoAdListener{
+public class MenuActivity extends AppCompatActivity implements RewardedVideoAdListener {
     ViewPager viewPager;
     MenuAdapter adapter;
     TextView tv_coin;
@@ -42,8 +36,6 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        PreferenceHelper.firstGameRun(this);
         showDialog();
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
@@ -56,7 +48,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         tv_coin = (TextView) findViewById(R.id.tv_coin);
 
-      //  loadRewardedVideoAd();
+        //  loadRewardedVideoAd();
     }
 
     private void loadRewardedVideoAd() {
@@ -64,12 +56,13 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         Toast.makeText(this, "Завантаження реклами розпочалось", Toast.LENGTH_LONG).show();
     }
 
-    public void showRewardedVideoAd(){
+    public void showRewardedVideoAd() {
         if (rewardedVideoAd.isLoaded()) {
             rewardedVideoAd.show();
             Toast.makeText(this, "Відео з рекламою завантажено", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "Відео з рекламою не завантажено", Toast.LENGTH_LONG).show();}
+        } else {
+            Toast.makeText(this, "Відео з рекламою не завантажено", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -94,7 +87,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Toast.makeText(this, "Ви отримали " + rewardItem.getAmount()+ " " + rewardItem.getType(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Ви отримали " + rewardItem.getAmount() + " " + rewardItem.getType(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -110,14 +103,14 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onResume() {
         rewardedVideoAd.resume(this);
-        tv_coin.setText(""+PreferenceHelper.getCoin());
+//        tv_coin.setText("" + PreferenceHelper.getCoin());
         super.onResume();
     }
 
     @Override
     public void onPause() {
         rewardedVideoAd.pause(this);
-      //  showRewardedVideoAd();
+        //  showRewardedVideoAd();
         super.onPause();
     }
 
@@ -128,13 +121,12 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     }
 
     public void onMenuButtonClick(View view) {
-        if (view.getId()==R.id.btn_exit){
+        if (view.getId() == R.id.btn_exit) {
             finish();
         }
     }
 
     public void showDialog() {
-
         AppEvaluationDialog dialog = new AppEvaluationDialog();
         dialog.show(getSupportFragmentManager(), "custom");
     }

@@ -40,8 +40,10 @@ public class PreferenceHelper {
         editor.putInt("bestScore" + game, bestScore);
         editor.commit();
     }
-
-    public static int getBestScoreGame(int game) {
+    public static int getBestScoreGame(int game, Context context) {
+        if (sharedPreferences == null) {
+            sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        }
         return sharedPreferences.getInt("bestScore" + game, 0);
     }
 
@@ -57,21 +59,5 @@ public class PreferenceHelper {
 
     public static int getCoin(){
         return sharedPreferences.getInt("coin", 0);
-    }
-
-    public static void firstGameRun(Context context){
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-
-            for (int i = 0; i < 6; i++) {
-                writeBestScoreGame(i, 0);
-            }
-
-            for (int i = 0; i < 6; i++) {
-                setUsingAddCoin(i, "");
-            }
-
-            setCoin(0);
-        }
     }
 }
