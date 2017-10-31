@@ -61,7 +61,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame,getContext());
+        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame, getActivity().getApplicationContext());
 
         MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
 
