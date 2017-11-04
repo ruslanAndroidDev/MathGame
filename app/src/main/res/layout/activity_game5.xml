@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="fast.kopach.math.games.Game5">
 
@@ -17,13 +18,18 @@
         android:id="@+id/puzzleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/header" />
+        android:layout_below="@+id/header"
+        android:layout_above="@+id/fab"/>
 
-    <ImageView
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_check_circle_black_24dp" />
+        app:fabSize="normal"
+        android:id="@+id/fab"
+        android:onClick="onBtnClick"
+        app:elevation="10dp"
+        android:src="@drawable/ic_check_black_24dp"/>
 </RelativeLayout>

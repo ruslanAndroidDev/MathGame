@@ -1,8 +1,11 @@
 package fast.kopach.math.games;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +37,7 @@ public class Game1 extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
-        bestScore = PreferenceHelper.getBestScoreGame(1,this);
+        bestScore = PreferenceHelper.getBestScoreGame(1, this);
         headerFragment.setBestScore(bestScore);
         handler = new Handler();
         replayDialog = new ReplayDialog(this);
@@ -84,7 +87,12 @@ public class Game1 extends AppCompatActivity {
                 showDialog();
             }
         } else {
-            Toast.makeText(this, "Введіть відповідь!", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(textView, "Please, enter your answer.", Snackbar.LENGTH_SHORT);
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            snackbar.show();
         }
     }
 

@@ -27,9 +27,14 @@ public class SquareButton extends Button {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    }
+
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        setHeight(canvas.getWidth());
     }
 
     public void setColor(int color) {
