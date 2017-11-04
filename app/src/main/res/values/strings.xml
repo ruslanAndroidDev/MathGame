@@ -5,4 +5,11 @@
     <string name="nativeAdView1">ca-app-pub-8320045635693885/5699287859</string>
     <string name="bannerAdView1">ca-app-pub-8320045635693885/1086752288</string>
     <string name="interstitialAd1">ca-app-pub-8320045635693885/7405754217</string>
+
+    <string name="nameGame1">I\'m a calculator</string>
+    <string name="nameGame2">Something is missing</string>
+    <string name="nameGame3">More or less</string>
+    <string name="nameGame4">In order</string>
+    <string name="nameGame5">Puzzle</string>
+    <string name="nameGame6">Detective</string>
 </resources>

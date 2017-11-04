@@ -60,4 +60,10 @@ public class PreferenceHelper {
     public static int getCoin(){
         return sharedPreferences.getInt("coin", 0);
     }
+
+    public static void firstCreateSharedPref(Context context){
+        if (sharedPreferences == null) {
+            sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package fast.kopach.math.games;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -14,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.google.android.gms.ads.AdListener;
@@ -35,13 +37,19 @@ import fast.kopach.math.Utill;
  */
 
 public class ReplayDialog extends DialogFragment implements View.OnClickListener {
+    public static String RED = "#ed3b27";
+    public static String GREEN = "#6abd2b";
+    public static String BLUE = "#0066FF";
+
+    InfoDialog infoDialog;
     ReplayListener listener;
     ImageView replay;
     ImageView back;
     ImageView setting;
     private int score;
     private int bestScore;
-    TextView scoreTv, textScoreTV, textToProgressBarTV;
+    TextView scoreTv, textScoreTV, textToProgressBarTV, tvCoin, tvGameName;
+    TextView tvInfo;
     Random random;
     RoundCornerProgressBar progress1;
 
@@ -61,6 +69,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        infoDialog = new InfoDialog();
+
         bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame, getActivity().getApplicationContext());
 
         MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
@@ -72,10 +82,11 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         final View parentLayout = v.findViewById(R.id.parentLayout);
 
         progress1 = (RoundCornerProgressBar) v.findViewById(R.id.roundCornerProgressBar);
-        progress1.setProgressColor(Color.parseColor("#ed3b27"));
-        progress1.setProgressBackgroundColor(Color.parseColor("#808080"));
         progress1.setMax(Calculation.getScoreBoundaryPoint(bestScore));
         progress1.setProgress(bestScore);
+        progress1.setProgressBackgroundColor(Color.parseColor("#808080"));
+        progress1.setProgressColor(Color.parseColor(getMyProgressColor(progress1.getMax(), progress1.getProgress())));
+
 
         final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -116,8 +127,21 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         scoreTv = (TextView) v.findViewById(R.id.replay_score_tv);
         // textScoreTV = (TextView) v.findViewById(R.id.replay_text_score);
         textToProgressBarTV = (TextView) v.findViewById(R.id.replay_text_progress_bar);
+        tvInfo = (TextView) v.findViewById(R.id.tvInfo);
+        tvCoin = (TextView) v.findViewById(R.id.tv_coin);
+        tvGameName = (TextView) v.findViewById(R.id.tv_game_name);
         scoreTv.setText("" + score);
+        tvCoin.setText("" + PreferenceHelper.getCoin());
+        tvGameName.setText("" + Utill.getGameName(PreferenceHelper.launchedGame));
         textToProgressBarTV.setText(bestScore + "/" + Calculation.getScoreBoundaryPoint(bestScore));
+
+        tvInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infoDialog.show(getFragmentManager(), String.valueOf(PreferenceHelper.launchedGame));
+            }
+        });
+
         builder.setCancelable(false);
         setCancelable(false);
         return builder.create();
@@ -162,5 +186,19 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
+    }
+
+
+    public String getMyProgressColor(float max, float progress){
+        String progressColor = RED;
+        if (progress > 0.8*max){
+            progressColor = GREEN;
+        }else if (progress > 0.3*max){
+            progressColor = BLUE;
+        }else {
+            progressColor = RED;
+        }
+
+            return progressColor;
     }
 }

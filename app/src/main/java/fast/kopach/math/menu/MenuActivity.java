@@ -1,5 +1,6 @@
 package fast.kopach.math.menu;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -36,6 +37,10 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Перше створення SharedPreff, не додумався куди вписати, тому написав тут
+        PreferenceHelper.firstCreateSharedPref(this);
+
         showDialog();
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
@@ -47,7 +52,6 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         viewPager.setAdapter(adapter);
 
         tv_coin = (TextView) findViewById(R.id.tv_coin);
-
         //  loadRewardedVideoAd();
     }
 
@@ -103,7 +107,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onResume() {
         rewardedVideoAd.resume(this);
-//        tv_coin.setText("" + PreferenceHelper.getCoin());
+        tv_coin.setText("" + PreferenceHelper.getCoin());
         super.onResume();
     }
 

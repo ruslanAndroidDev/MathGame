@@ -45,7 +45,7 @@ public class Game2 extends AppCompatActivity {
         variantbtn6 = (Button) findViewById(R.id.btn6);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         buttonArray = new Button[]{variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6};
-        bestScore = PreferenceHelper.getBestScoreGame(2,this);
+        bestScore = PreferenceHelper.getBestScoreGame(2, this);
         headerFragment.setBestScore(bestScore);
         buildGame();
         handler = new Handler();
@@ -57,8 +57,8 @@ public class Game2 extends AppCompatActivity {
             errorClickedBtn.setColor(Color.parseColor("#4775ba"));
         }
         int propysk = random.nextInt(3);
-        int number1 = random.nextInt(25) + random.nextInt((score + 1) * 5);
-        int number2 = random.nextInt(25) + random.nextInt((score + 1) * 4);
+        int number1 = random.nextInt(25) + random.nextInt((score +1)* 5);
+        int number2 = random.nextInt(25) + random.nextInt((score +1)* 4);
         int znak = random.nextInt(2);
         switch (propysk) {
             case 0:  // пропуск в першого числа
@@ -76,10 +76,10 @@ public class Game2 extends AppCompatActivity {
                 true_answer = number2;
                 if (znak == 0) {
                     int result = number1 + number2;
-                    taskStr = "<font color=#000000>" + number1 + " +</font> <font color=#4000FF> ? </font>" + "<font color=#000000>= " + result + "</font>";
+                    taskStr = "<font color=#000000>" + number1 + " +</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
                 } else {
                     int result = number1 - number2;
-                    taskStr = "<font color=#000000>" + number1 + " -</font> <font color=#4000FF> ? </font>" + "<font color=#000000>= " + result + "</font>";
+                    taskStr = "<font color=#000000>" + number1 + " -</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
                 }
                 break;
 
@@ -107,7 +107,7 @@ public class Game2 extends AppCompatActivity {
 
     private void fillVariants() {
         for (int i = 0; i < 6; i++) {
-            buttonArray[i].setText(random.nextInt(25) + random.nextInt((score + 1) * 5) + "");
+            buttonArray[i].setText(random.nextInt(25) + random.nextInt((score+1) * 5) + "");
         }
 
         int trueBtn = random.nextInt(6);

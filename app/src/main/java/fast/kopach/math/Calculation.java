@@ -31,119 +31,119 @@ public class Calculation {
 
         switch (PreferenceHelper.launchedGame) {
             case 1:
-                if (bestScore > VariablesInGame.INT_game1FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game1FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game1ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game1FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game1SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game1ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game1FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game1SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game1FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
 
                 break;
 
             case 2:
-                if (bestScore > VariablesInGame.INT_game2FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game2FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game2ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game2FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game2SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game2ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game2FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game2SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game2FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
 
                 break;
 
             case 3:
-                if (bestScore > VariablesInGame.INT_game3FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game3FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game3ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game3FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game3SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game3ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game3FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game3SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game3FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
                 break;
 
             case 4:
-                if (bestScore > VariablesInGame.INT_game4FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game4FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game4ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game4FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game4SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game4ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game4FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game4SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game4FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
 
                 break;
 
             case 5:
-                if (bestScore > VariablesInGame.INT_game5FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game5FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game5ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game5FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game5SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game5ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game5FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game5SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game5FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
 
                 break;
 
             case 6:
-                if (bestScore > VariablesInGame.INT_game6FourthScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game6FifthScoreBoundaryPoint, VariablesInGame.INT_gameFifthAddCoin);
+                if (bestScore > VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[3]) {
+                    method2(VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[4], VariablesInGame.ARRAY_GAME_ADD_COIN[4]);
 
-                } else if (bestScore > VariablesInGame.INT_game6ThirdScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game6FourthScoreBoundaryPoint, VariablesInGame.INT_gameFourthAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[2]) {
+                    method2(VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[3], VariablesInGame.ARRAY_GAME_ADD_COIN[3]);
 
-                } else if (bestScore > VariablesInGame.INT_game6SecondScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game6ThirdScoreBoundaryPoint, VariablesInGame.INT_gameThirdAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[1]) {
+                    method2(VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[2], VariablesInGame.ARRAY_GAME_ADD_COIN[2]);
 
-                } else if (bestScore > VariablesInGame.INT_game6FirstScoreBoundaryPoint) {
-                    method2(VariablesInGame.INT_game6SecondScoreBoundaryPoint, VariablesInGame.INT_gameSecondAddCoin);
+                } else if (bestScore > VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[0]) {
+                    method2(VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[1], VariablesInGame.ARRAY_GAME_ADD_COIN[1]);
 
                 } else if (bestScore >= 0) {
-                    method2(VariablesInGame.INT_game6FirstScoreBoundaryPoint, VariablesInGame.INT_gameFirstAddCoin);
+                    method2(VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[0], VariablesInGame.ARRAY_GAME_ADD_COIN[0]);
 
                 }
 
@@ -152,9 +152,9 @@ public class Calculation {
 
     }
 
-    private static void method2(int INT_gameScoreBoundaryPoint, int INT_gameAddCoin){
-        scoreBoundaryPoint = INT_gameScoreBoundaryPoint;
-        addCoin = INT_gameAddCoin;
+    private static void method2(int gameScoreBoundaryPoint, int gameAddCoin){
+        scoreBoundaryPoint = gameScoreBoundaryPoint;
+        addCoin = gameAddCoin;
 
         coin();
     }
