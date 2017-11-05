@@ -96,7 +96,7 @@ public class Game2 extends AppCompatActivity {
                 break;
         }
         tv2.setText(Html.fromHtml(taskStr));
-        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+        headerFragment.startTimer(VariablesInGame.ARRAY_TIMER_IN_GAME[1], new HeaderFragment.TimerListener() {
             @Override
             public void onTimerFinish() {
                 showDialog();

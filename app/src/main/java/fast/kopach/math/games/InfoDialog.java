@@ -81,32 +81,32 @@ public class InfoDialog extends DialogFragment implements View.OnClickListener {
         switch (PreferenceHelper.launchedGame){
             case 1:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_1_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [0][i]);
                 }
                 break;
             case 2:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_2_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [1][i]);
                 }
                 break;
             case 3:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_3_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [2][i]);
                 }
                 break;
             case 4:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_4_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [3][i]);
                 }
                 break;
             case 5:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_5_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [4][i]);
                 }
                 break;
             case 6:
                 for (int i = 0; i <= 4; i++ ) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_6_SCORE_BOUNDARY_POINT[i]);
+                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT [5][i]);
                 }
                 break;
         }

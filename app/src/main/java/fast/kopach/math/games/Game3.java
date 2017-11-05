@@ -103,7 +103,7 @@ public class Game3 extends AppCompatActivity {
                 mark_right.setText("-");
             }
         }
-        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+        headerFragment.startTimer(VariablesInGame.ARRAY_TIMER_IN_GAME[2], new HeaderFragment.TimerListener() {
             @Override
             public void onTimerFinish() {
                 showDialog();

@@ -75,7 +75,7 @@ public class Game6 extends AppCompatActivity {
     private void buildGame() {
         fillAllVariantInTrue();
         setFalseVariant();
-        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+        headerFragment.startTimer(VariablesInGame.ARRAY_TIMER_IN_GAME[5], new HeaderFragment.TimerListener() {
             @Override
             public void onTimerFinish() {
                 showDialog();

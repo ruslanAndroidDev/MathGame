@@ -77,7 +77,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
 
     private void buildGame() {
         generateValue();
-        headerFragment.startTimer(20, this);
+        headerFragment.startTimer(VariablesInGame.ARRAY_TIMER_IN_GAME[3], this);
     }
 
 

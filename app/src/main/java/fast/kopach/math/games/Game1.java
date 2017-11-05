@@ -135,7 +135,7 @@ public class Game1 extends AppCompatActivity {
                 break;
         }
         textView.setText(textPryklad);
-        headerFragment.startTimer(20, new HeaderFragment.TimerListener() {
+        headerFragment.startTimer(VariablesInGame.ARRAY_TIMER_IN_GAME[0], new HeaderFragment.TimerListener() {
 
             @Override
             public void onTimerFinish() {
