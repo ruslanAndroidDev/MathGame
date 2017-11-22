@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/coins" />
+            android:src="@drawable/coin" />
 
         <TextView
             android:id="@+id/tv_coin"
@@ -33,7 +36,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Fast math"
-        android:textSize="32sp" />
+        android:textColor="#283593"
+        android:textSize="40sp" />
 
 
     <android.support.v4.view.ViewPager
@@ -82,6 +86,6 @@
             android:onClick="onMenuButtonClick"
             android:src="@drawable/ic_settings" />
     </RelativeLayout>
-
-
-</LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/settings_sheet" />
+</android.support.design.widget.CoordinatorLayout>

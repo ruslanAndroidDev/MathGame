@@ -13,7 +13,8 @@ import java.util.Random;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.customView.SquareButton;
-import fast.kopach.math.games.ReplayDialog.ReplayListener;
+import fast.kopach.math.dialogs.ReplayDialog;
+import fast.kopach.math.dialogs.ReplayDialog.ReplayListener;
 
 public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFragment.TimerListener {
     SquareButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16,

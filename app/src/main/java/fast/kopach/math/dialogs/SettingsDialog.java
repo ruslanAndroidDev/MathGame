@@ -1,30 +1,26 @@
-package fast.kopach.math.games;
+package fast.kopach.math.dialogs;
 
 import android.app.Dialog;
-import android.content.Context;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import fast.kopach.math.R;
-import fast.kopach.math.dialogs.ReplayDialog;
 
 /**
- * Created by Руслан on 14.10.2017.
+ * Created by Руслан on 19.11.2017.
  */
 
-public class CoinDialog extends ReplayDialog {
-    public CoinDialog(Context context) {
-        super(context);
-    }
-
+public class SettingsDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.coins, null);
+        View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
+
         return builder.create();
     }
 }

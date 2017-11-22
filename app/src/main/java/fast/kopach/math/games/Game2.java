@@ -15,6 +15,7 @@ import java.util.Random;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.customView.SquareButton;
+import fast.kopach.math.dialogs.ReplayDialog;
 
 public class Game2 extends AppCompatActivity {
     String taskStr = "";
@@ -36,13 +37,13 @@ public class Game2 extends AppCompatActivity {
         setContentView(R.layout.activity_game2);
 
         random = new Random();
-        tv2 = (TextView) findViewById(R.id.tv2);
-        variantbtn1 = (Button) findViewById(R.id.btn2);
-        variantbtn3 = (Button) findViewById(R.id.btn1);
-        variantbtn2 = (Button) findViewById(R.id.btn3);
-        variantbtn4 = (Button) findViewById(R.id.btn4);
-        variantbtn5 = (Button) findViewById(R.id.btn5);
-        variantbtn6 = (Button) findViewById(R.id.btn6);
+        tv2 = findViewById(R.id.tv2);
+        variantbtn1 = findViewById(R.id.btn2);
+        variantbtn3 = findViewById(R.id.btn1);
+        variantbtn2 = findViewById(R.id.btn3);
+        variantbtn4 = findViewById(R.id.btn4);
+        variantbtn5 = findViewById(R.id.btn5);
+        variantbtn6 = findViewById(R.id.btn6);
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         buttonArray = new Button[]{variantbtn1, variantbtn2, variantbtn3, variantbtn4, variantbtn5, variantbtn6};
         bestScore = PreferenceHelper.getBestScoreGame(2, this);

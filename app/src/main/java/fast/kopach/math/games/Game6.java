@@ -11,6 +11,7 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.dialogs.ReplayDialog;
 
 public class Game6 extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4, btn5;

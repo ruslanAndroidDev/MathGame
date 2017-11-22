@@ -8,12 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.dialogs.ReplayDialog;
 
 public class Game1 extends AppCompatActivity {
     TextView textView;

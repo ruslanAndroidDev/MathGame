@@ -19,7 +19,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/coins" />
+            android:src="@drawable/coin" />
 
         <TextView
             android:id="@+id/tv_coin"
@@ -138,7 +138,7 @@
             android:background="@drawable/round_button"
             android:clickable="true"
             android:padding="5dp"
-            android:src="@drawable/ic_settings_black_24dp" />
+            android:src="@drawable/ic_info_outline_black_24dp" />
 
     </RelativeLayout>
 

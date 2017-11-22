@@ -1,6 +1,5 @@
-package fast.kopach.math.games;
+package fast.kopach.math.dialogs;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -15,7 +14,6 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.google.android.gms.ads.AdListener;
@@ -48,7 +46,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     ImageView setting;
     private int score;
     private int bestScore;
-    TextView scoreTv, textScoreTV, textToProgressBarTV, tvCoin, tvGameName;
+    TextView scoreTv, textToProgressBarTV, tvCoin, tvGameName;
     TextView tvInfo;
     Random random;
     RoundCornerProgressBar progress1;
@@ -125,7 +123,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         setting.setOnClickListener(this);
 
         scoreTv = (TextView) v.findViewById(R.id.replay_score_tv);
-        // textScoreTV = (TextView) v.findViewById(R.id.replay_text_score);
         textToProgressBarTV = (TextView) v.findViewById(R.id.replay_text_progress_bar);
         tvInfo = (TextView) v.findViewById(R.id.tvInfo);
         tvCoin = (TextView) v.findViewById(R.id.tv_coin);
@@ -151,7 +148,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
-        // this.bestScore = bestScore;
 
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
@@ -176,7 +172,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         }
     }
 
-    interface ReplayListener {
+    public interface ReplayListener {
         abstract void onReplayClick();
 
         abstract void onBackClick();
@@ -189,16 +185,16 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     }
 
 
-    public String getMyProgressColor(float max, float progress){
-        String progressColor = RED;
-        if (progress > 0.8*max){
+    public String getMyProgressColor(float max, float progress) {
+        String progressColor;
+        if (progress > 0.8 * max) {
             progressColor = GREEN;
-        }else if (progress > 0.3*max){
+        } else if (progress > 0.3 * max) {
             progressColor = BLUE;
-        }else {
+        } else {
             progressColor = RED;
         }
 
-            return progressColor;
+        return progressColor;
     }
 }

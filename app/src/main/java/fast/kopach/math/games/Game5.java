@@ -7,6 +7,7 @@ import android.view.View;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.customView.PuzzleGameView;
+import fast.kopach.math.dialogs.ReplayDialog;
 
 public class Game5 extends AppCompatActivity {
 

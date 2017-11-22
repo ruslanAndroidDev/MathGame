@@ -1,16 +1,8 @@
 package fast.kopach.math;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
-
-import java.util.Set;
-
-import fast.kopach.math.games.ReplayDialog;
 
 /**
  * Created by Руслан on 17.09.2017.
@@ -65,5 +57,14 @@ public class PreferenceHelper {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         }
+    }
+
+    public static int getPrice(int position) {
+        if (position==5){
+            return 100;
+        }else if(position==6){
+            return 200;
+        }
+        return 0;
     }
 }

@@ -11,8 +11,8 @@ import java.util.Random;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
-import fast.kopach.math.Utill;
 import fast.kopach.math.customView.SquareButton;
+import fast.kopach.math.dialogs.ReplayDialog;
 
 public class Game3 extends AppCompatActivity {
 

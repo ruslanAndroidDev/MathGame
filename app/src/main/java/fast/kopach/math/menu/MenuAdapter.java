@@ -22,17 +22,17 @@ public class MenuAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new MenuItemFragment(R.drawable.texture1s, "I'm a calculator",1);
+                return new MenuItemFragment(R.drawable.texture1s, "I'm a calculator",1,false);
             case 1:
-                return new MenuItemFragment(R.drawable.texture2, "Something is missing",2);
+                return new MenuItemFragment(R.drawable.texture2, "Something is missing",2,false);
             case 2:
-                return new MenuItemFragment(R.drawable.texture3s, "More or less",3);
+                return new MenuItemFragment(R.drawable.texture3s, "More or less",3,false);
             case 3:
-                return new MenuItemFragment(R.drawable.texture4, "In order",4);
+                return new MenuItemFragment(R.drawable.texture4, "In order",4,false);
             case 4:
-                return new MenuItemFragment(R.drawable.texture5, "Puzzle",5);
+                return new MenuItemFragment(R.drawable.locked_padlock, "Puzzle",5,true);
             case 5:
-                return new MenuItemFragment(R.drawable.texture6, "Detective",6);
+                return new MenuItemFragment(R.drawable.locked_padlock, "Detective",6,true);
         }
         return null;
     }

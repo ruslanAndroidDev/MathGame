@@ -1,14 +1,17 @@
 package fast.kopach.math.menu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,13 +34,17 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
     String title;
     ImageView imageView;
     TextView textView;
+    TextView unlockTv;
+    CardView cardView;
     int position;
     Intent intent;
+    boolean isLocked;
 
-    public MenuItemFragment(int drawable, String title, int position) {
+    public MenuItemFragment(int drawable, String title, int position, boolean isLocked) {
         this.icon = drawable;
         this.title = title;
         this.position = position;
+        this.isLocked = isLocked;
         intent = new Intent();
     }
 
@@ -47,11 +54,22 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.menu, container, false);
         imageView = v.findViewById(R.id.menu_iv);
         textView = v.findViewById(R.id.menu_tv);
-        textView.setText(title);
-        if (position != 3 & position != 1& position != 2) {
-            Picasso.with(getContext()).load(icon).fit().into(imageView);
+        unlockTv = v.findViewById(R.id.unlockTv);
+        cardView = v.findViewById(R.id.menuCardView);
+        if (isLocked) {
+            cardView.setCardBackgroundColor(Color.parseColor("#FF454444"));
+            textView.setText(title);
+            textView.setTextColor(Color.WHITE);
+            imageView.setImageResource(R.drawable.locked_padlock);
+            unlockTv.setVisibility(View.VISIBLE);
+            unlockTv.setText("Unlock for " + PreferenceHelper.getPrice(position) + " ©");
         } else {
-            imageView.setImageResource(icon);
+            textView.setText(title);
+            if (position != 3 & position != 1 & position != 2) {
+                Picasso.with(getContext()).load(icon).fit().into(imageView);
+            } else {
+                imageView.setImageResource(icon);
+            }
         }
         v.setOnClickListener(this);
         v.setSoundEffectsEnabled(false);
@@ -70,35 +88,46 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (position) {
-            case 1:
-                intent.setClass(getContext(), Game1.class);
-                PreferenceHelper.launchedGame = 1;
-                break;
-            case 2:
-                intent.setClass(getContext(), Game2.class);
-                PreferenceHelper.launchedGame = 2;
-                break;
-            case 3:
-                intent.setClass(getContext(), Game3.class);
-                PreferenceHelper.launchedGame = 3;
-                break;
-            case 4:
-                intent.setClass(getContext(), Game4.class);
-                PreferenceHelper.launchedGame = 4;
-                break;
-            case 5:
-                intent.setClass(getContext(), Game5.class);
-                PreferenceHelper.launchedGame = 5;
-                break;
-            case 6:
-                intent.setClass(getContext(), Game6.class);
-                PreferenceHelper.launchedGame = 6;
-                break;
+        if (!isLocked) {
+            switch (position) {
+                case 1:
+                    intent.setClass(getContext(), Game1.class);
+                    PreferenceHelper.launchedGame = 1;
+                    break;
+                case 2:
+                    intent.setClass(getContext(), Game2.class);
+                    PreferenceHelper.launchedGame = 2;
+                    break;
+                case 3:
+                    intent.setClass(getContext(), Game3.class);
+                    PreferenceHelper.launchedGame = 3;
+                    break;
+                case 4:
+                    intent.setClass(getContext(), Game4.class);
+                    PreferenceHelper.launchedGame = 4;
+                    break;
+                case 5:
+                    intent.setClass(getContext(), Game5.class);
+                    PreferenceHelper.launchedGame = 5;
+                    break;
+                case 6:
+                    intent.setClass(getContext(), Game6.class);
+                    PreferenceHelper.launchedGame = 6;
+                    break;
+            }
+            startActivity(intent);
+            Utill.playSound(getContext());
+        } else {
+            if (PreferenceHelper.getCoin() > PreferenceHelper.getPrice(position)) {
+                unlockGame();
+            } else {
+                Toast.makeText(getContext(), "You dont have enought maney", Toast.LENGTH_SHORT).show();
+            }
         }
-        startActivity(intent);
-        Utill.playSound(getContext());
     }
 
+    void unlockGame() {
+        PreferenceHelper.setCoin(PreferenceHelper.getCoin() - PreferenceHelper.getPrice(position));
+    }
 }
 
