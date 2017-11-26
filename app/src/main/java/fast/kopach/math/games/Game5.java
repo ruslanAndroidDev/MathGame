@@ -51,7 +51,7 @@ public class Game5 extends AppCompatActivity {
     }
 
     private void showErrorDialog() {
-        replayDialog.show(getFragmentManager(), myScore, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), myScore,5,myScore*2, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 myScore = 0;

@@ -38,13 +38,13 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
     CardView cardView;
     int position;
     Intent intent;
-    boolean isLocked;
+    boolean isOpen;
 
-    public MenuItemFragment(int drawable, String title, int position, boolean isLocked) {
+    public MenuItemFragment(int drawable, String title, int position, boolean isOpen) {
         this.icon = drawable;
         this.title = title;
         this.position = position;
-        this.isLocked = isLocked;
+        this.isOpen = isOpen;
         intent = new Intent();
     }
 
@@ -56,21 +56,20 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
         textView = v.findViewById(R.id.menu_tv);
         unlockTv = v.findViewById(R.id.unlockTv);
         cardView = v.findViewById(R.id.menuCardView);
-        if (isLocked) {
+        if (!isOpen) {
             cardView.setCardBackgroundColor(Color.parseColor("#FF454444"));
-            textView.setText(title);
             textView.setTextColor(Color.WHITE);
             imageView.setImageResource(R.drawable.locked_padlock);
             unlockTv.setVisibility(View.VISIBLE);
             unlockTv.setText("Unlock for " + PreferenceHelper.getPrice(position) + " ©");
         } else {
-            textView.setText(title);
             if (position != 3 & position != 1 & position != 2) {
                 Picasso.with(getContext()).load(icon).fit().into(imageView);
             } else {
                 imageView.setImageResource(icon);
             }
         }
+        textView.setText(title);
         v.setOnClickListener(this);
         v.setSoundEffectsEnabled(false);
         return v;
@@ -88,31 +87,25 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (!isLocked) {
+        if (isOpen) {
             switch (position) {
                 case 1:
                     intent.setClass(getContext(), Game1.class);
-                    PreferenceHelper.launchedGame = 1;
                     break;
                 case 2:
                     intent.setClass(getContext(), Game2.class);
-                    PreferenceHelper.launchedGame = 2;
                     break;
                 case 3:
                     intent.setClass(getContext(), Game3.class);
-                    PreferenceHelper.launchedGame = 3;
                     break;
                 case 4:
                     intent.setClass(getContext(), Game4.class);
-                    PreferenceHelper.launchedGame = 4;
                     break;
                 case 5:
                     intent.setClass(getContext(), Game5.class);
-                    PreferenceHelper.launchedGame = 5;
                     break;
                 case 6:
                     intent.setClass(getContext(), Game6.class);
-                    PreferenceHelper.launchedGame = 6;
                     break;
             }
             startActivity(intent);
@@ -128,6 +121,10 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
 
     void unlockGame() {
         PreferenceHelper.setCoin(PreferenceHelper.getCoin() - PreferenceHelper.getPrice(position));
+        PreferenceHelper.openGame(position);
+        unlockTv.setVisibility(View.GONE);
+        cardView.setCardBackgroundColor(Color.WHITE);
+        imageView.setImageResource(icon);
     }
 }
 

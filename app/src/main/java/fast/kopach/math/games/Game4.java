@@ -107,7 +107,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
             }
         } else {
             clickedBtn.setColor(Color.RED);
-            replayDialog.show(getFragmentManager(), score, this);
+            replayDialog.show(getFragmentManager(), score,4,score*5, this);
         }
     }
 
@@ -185,7 +185,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
 
     @Override
     public void onTimerFinish() {
-        replayDialog.show(getFragmentManager(), score, this);
+        replayDialog.show(getFragmentManager(), score,4,score*5, this);
     }
 
     @Override

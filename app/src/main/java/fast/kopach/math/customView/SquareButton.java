@@ -67,10 +67,7 @@ public class SquareButton extends Button {
         states.addState(new int[]{android.R.attr.state_pressed}, state_pressed);
         states.addState(new int[]{android.R.attr.state_selected}, state_pressed);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(states);
-        } else {
-            setBackgroundDrawable(states);
-        }
+        //TODO FIX FOR ANDROID<5
+        setBackground(states);
     }
 }

@@ -140,7 +140,7 @@ public class Game2 extends AppCompatActivity {
     }
 
     void showDialog() {
-        replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), score,2,score/2, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 score = 0;

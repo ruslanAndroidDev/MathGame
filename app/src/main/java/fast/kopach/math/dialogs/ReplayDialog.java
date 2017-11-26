@@ -35,26 +35,21 @@ import fast.kopach.math.Utill;
  */
 
 public class ReplayDialog extends DialogFragment implements View.OnClickListener {
-    public static String RED = "#ed3b27";
-    public static String GREEN = "#6abd2b";
-    public static String BLUE = "#0066FF";
 
     InfoDialog infoDialog;
     ReplayListener listener;
-    ImageView replay;
-    ImageView back;
-    ImageView setting;
+    ImageView replay,setting,back;
     private int score;
-    private int bestScore;
-    TextView scoreTv, textToProgressBarTV, tvCoin, tvGameName;
-    TextView tvInfo;
+    TextView scoreTv, tvGameName,coinTv,bestScoreTv;
     Random random;
-    RoundCornerProgressBar progress1;
 
     boolean isLoadInterstialAd = false;
 
     private InterstitialAd mInterstitialAd;
     Context context;
+    private int coin;
+    String name;
+    private int game;
 
     public ReplayDialog(final Context context) {
         this.context = context;
@@ -68,9 +63,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         infoDialog = new InfoDialog();
-
-        bestScore = PreferenceHelper.getBestScoreGame(PreferenceHelper.launchedGame, getActivity().getApplicationContext());
-
         MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -78,13 +70,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
-
-        progress1 = (RoundCornerProgressBar) v.findViewById(R.id.roundCornerProgressBar);
-        progress1.setMax(Calculation.getScoreBoundaryPoint(bestScore));
-        progress1.setProgress(bestScore);
-        progress1.setProgressBackgroundColor(Color.parseColor("#808080"));
-        progress1.setProgressColor(Color.parseColor(getMyProgressColor(progress1.getMax(), progress1.getProgress())));
-
 
         final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
         parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -114,41 +99,37 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 }
             }
         });
-
-        replay = (ImageView) v.findViewById(R.id.replay_replay);
+        bestScoreTv = v.findViewById(R.id.replay_best_score_tv);
+        bestScoreTv.setText(PreferenceHelper.getBestScoreGame(game,getActivity())+"");
+        coinTv = v.findViewById(R.id.coinTv);
+        replay = v.findViewById(R.id.replay_replay);
         replay.setOnClickListener(this);
-        back = (ImageView) v.findViewById(R.id.replay_back);
+        back = v.findViewById(R.id.replay_back);
         back.setOnClickListener(this);
-        setting = (ImageView) v.findViewById(R.id.replay_setting);
+        setting = v.findViewById(R.id.replay_setting);
         setting.setOnClickListener(this);
 
-        scoreTv = (TextView) v.findViewById(R.id.replay_score_tv);
-        textToProgressBarTV = (TextView) v.findViewById(R.id.replay_text_progress_bar);
-        tvInfo = (TextView) v.findViewById(R.id.tvInfo);
-        tvCoin = (TextView) v.findViewById(R.id.tv_coin);
-        tvGameName = (TextView) v.findViewById(R.id.tv_game_name);
+        scoreTv = v.findViewById(R.id.replay_score_tv);
+        tvGameName = v.findViewById(R.id.tv_game_name);
         scoreTv.setText("" + score);
-        tvCoin.setText("" + PreferenceHelper.getCoin());
-        tvGameName.setText("" + Utill.getGameName(PreferenceHelper.launchedGame));
-        textToProgressBarTV.setText(bestScore + "/" + Calculation.getScoreBoundaryPoint(bestScore));
+        tvGameName.setText(name);
+        coinTv.setText(coin+"");
 
-        tvInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                infoDialog.show(getFragmentManager(), String.valueOf(PreferenceHelper.launchedGame));
-            }
-        });
 
         builder.setCancelable(false);
         setCancelable(false);
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int score, ReplayListener listener) {
+    public void show(FragmentManager manager, int score,int game,int coin, ReplayListener listener) {
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
+        this.game = game;
+        this.name = Utill.getGameName(game);
+        this.coin = coin;
 
+        PreferenceHelper.addCoin(coin);
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
@@ -182,19 +163,5 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
-    }
-
-
-    public String getMyProgressColor(float max, float progress) {
-        String progressColor;
-        if (progress > 0.8 * max) {
-            progressColor = GREEN;
-        } else if (progress > 0.3 * max) {
-            progressColor = BLUE;
-        } else {
-            progressColor = RED;
-        }
-
-        return progressColor;
     }
 }

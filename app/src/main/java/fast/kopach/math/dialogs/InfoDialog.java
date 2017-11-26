@@ -49,41 +49,42 @@ public class InfoDialog extends DialogFragment {
         TextView tvScore[] = {tvScore1, tvScore2, tvScore3, tvScore4, tvScore5};
         TextView tvCoin[] = {tvCoin1, tvCoin2, tvCoin3, tvCoin4, tvCoin5};
 
-        tvGameName.setText(Utill.getGameName(PreferenceHelper.launchedGame));
+//        tvGameName.setText(Utill.getGameName(PreferenceHelper.launchedGame));
+
 
         //Налаштування виводу меж в рівнях в залежності від гри
-        switch (PreferenceHelper.launchedGame) {
-            case 1:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[0][i]);
-                }
-                break;
-            case 2:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[1][i]);
-                }
-                break;
-            case 3:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[2][i]);
-                }
-                break;
-            case 4:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[3][i]);
-                }
-                break;
-            case 5:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[4][i]);
-                }
-                break;
-            case 6:
-                for (int i = 0; i <= 4; i++) {
-                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[5][i]);
-                }
-                break;
-        }
+//        switch (PreferenceHelper.launchedGame) {
+//            case 1:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[0][i]);
+//                }
+//                break;
+//            case 2:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[1][i]);
+//                }
+//                break;
+//            case 3:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[2][i]);
+//                }
+//                break;
+//            case 4:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[3][i]);
+//                }
+//                break;
+//            case 5:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[4][i]);
+//                }
+//                break;
+//            case 6:
+//                for (int i = 0; i <= 4; i++) {
+//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[5][i]);
+//                }
+//                break;
+//        }
 
         //Налаштування виводу монет в рівнях в залежності від гри
         for (int i = 0; i <= 4; i++) {

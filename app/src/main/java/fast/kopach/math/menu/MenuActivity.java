@@ -1,6 +1,5 @@
 package fast.kopach.math.menu;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -52,8 +51,10 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         // Перше створення SharedPreff, не додумався куди вписати, тому написав тут
         PreferenceHelper.firstCreateSharedPref(this);
-
-        showDialog();
+        PreferenceHelper.launchGame(this);
+        if (PreferenceHelper.getLauncheCount() == 5) {
+            showDialog();
+        }
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
@@ -119,7 +120,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     public void onResume() {
         rewardedVideoAd.resume(this);
-//        tv_coin.setText("" + PreferenceHelper.getCoin());
+        tv_coin.setText(PreferenceHelper.getCoin() + "");
         super.onResume();
     }
 
@@ -139,7 +140,7 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
     public void onMenuButtonClick(View view) {
         if (view.getId() == R.id.btn_exit) {
             finish();
-        }else if(view.getId()==R.id.btn_setting){
+        } else if (view.getId() == R.id.btn_setting) {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }
     }

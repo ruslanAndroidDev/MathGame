@@ -97,7 +97,8 @@ public class Game1 extends AppCompatActivity {
     }
 
     void showDialog() {
-        replayDialog.show(getFragmentManager(), score, new ReplayDialog.ReplayListener() {
+        int coin = score/2;
+        replayDialog.show(getFragmentManager(), score,1,coin, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 replayDialog.dismiss();
