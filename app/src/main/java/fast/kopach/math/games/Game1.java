@@ -7,10 +7,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.Random;
 
+import fast.kopach.math.Advertising;
+import fast.kopach.math.BuildConfig;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.dialogs.ReplayDialog;
@@ -34,6 +42,8 @@ public class Game1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game1);
 
+        MobileAds.initialize(this, "ca-app-pub-8320045635693885~7488509104");
+
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
@@ -43,6 +53,17 @@ public class Game1 extends AppCompatActivity {
         replayDialog = new ReplayDialog(this);
 
         buildGame();
+
+       /* LinearLayout linear = (LinearLayout) findViewById(R.id.linearLayout1);
+        AdView ad = new AdView(this);
+        ad.setAdSize(AdSize.SMART_BANNER);
+        ad.setAdUnitId("ca-app-pub-8320045635693885/6995257268");
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("*************")
+                .build();
+
+        linear.addView(ad);
+        ad.loadAd(adRequest);  */
 
     }
 
@@ -83,7 +104,6 @@ public class Game1 extends AppCompatActivity {
                 headerFragment.setScore(score);
                 buildGame();
             } else {
-                headerFragment.stopTimer();
                 showDialog();
             }
         } else {
@@ -97,6 +117,7 @@ public class Game1 extends AppCompatActivity {
     }
 
     void showDialog() {
+        headerFragment.stopTimer();
         int coin = score/2;
         replayDialog.show(getFragmentManager(), score,1,coin, new ReplayDialog.ReplayListener() {
             @Override

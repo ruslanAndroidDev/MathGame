@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="fast.kopach.math.games.Game6">
+    tools:context="fast.kopach.math.games.Game5">
 
     <fragment
         android:id="@+id/header"

@@ -1,5 +1,6 @@
 package fast.kopach.math.dialogs;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -19,33 +20,34 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Random;
 
+import fast.kopach.math.Advertising;
+import fast.kopach.math.AppEvaluationDialog;
 import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.Utill;
+import fast.kopach.math.games.HeaderFragment;
+import fast.kopach.math.games.VariablesInGame;
 
 /**
  * Created by Руслан on 16.09.2017.
  */
 
 public class ReplayDialog extends DialogFragment implements View.OnClickListener {
-
-    InfoDialog infoDialog;
+    Advertising advertising;
     ReplayListener listener;
     ImageView replay,setting,back;
     private int score;
     TextView scoreTv, tvGameName,coinTv,bestScoreTv;
     Random random;
 
-    boolean isLoadInterstialAd = false;
-
-    private InterstitialAd mInterstitialAd;
     Context context;
     private int coin;
     String name;
@@ -53,16 +55,13 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
 
     public ReplayDialog(final Context context) {
         this.context = context;
-        mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
         random = new Random();
+        advertising = new Advertising(context);
     }
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        infoDialog = new InfoDialog();
         MobileAds.initialize(getActivity().getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -71,34 +70,45 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
 
-        final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
-        parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                //дізнаємося ширину dialog і показуємо рекламу
-                int width = (int) Utill.convertPixelsToDp(parentLayout.getWidth(), getActivity());
-                parentLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                if (width > 280) {
-                    Log.d("tag", "width>280");
-                    adView.setAdSize(new AdSize(width, 80));
-                    adView.setAdUnitId(getString(R.string.nativeAdView1));
-                    AdRequest request = new AdRequest.Builder().build();
-                    adView.loadAd(request);
-                    adView.setAdListener(new AdListener() {
-                        @Override
-                        public void onAdLoaded() {
-                            super.onAdLoaded();
-                            ((LinearLayout) parentLayout).addView(adView);
-                        }
-                    });
-                } else {
-                    isLoadInterstialAd = true;
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
+        //Алгоритм що вирішує коли буде нативна а коли міжсторінкова реклама
+        VariablesInGame.isShowInterstitialAd = false;
+        for (int i = 0; i < VariablesInGame.boundary_point_show_replay_for_ad.length; i++){
+            if (VariablesInGame.SHOW_REPLAY_COUNT == VariablesInGame.boundary_point_show_replay_for_ad[i]){
+                advertising.loadInterstitialAd();
+            }else if (VariablesInGame.SHOW_REPLAY_COUNT - 1 == VariablesInGame.boundary_point_show_replay_for_ad[i]){
+                VariablesInGame.isShowInterstitialAd = true;
+                advertising.showInterstitialAd();
+            }
+        }
+
+        if (!VariablesInGame.isShowInterstitialAd){
+            final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
+            parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    //дізнаємося ширину dialog і показуємо рекламу
+                    int width = (int) Utill.convertPixelsToDp(parentLayout.getWidth(), getActivity());
+                    parentLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    if (width > 280) {
+                        Log.d("tag", "width>280");
+                        adView.setAdSize(new AdSize(width, 80));
+                        adView.setAdUnitId(getString(R.string.nativeAdView1));
+                        AdRequest request = new AdRequest.Builder().build();
+                        adView.loadAd(request);
+                        adView.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdLoaded() {
+                                super.onAdLoaded();
+                                ((LinearLayout) parentLayout).addView(adView);
+                            }
+                        });
+                    } else {
+
                     }
                 }
-            }
-        });
+            });
+        }
+
         bestScoreTv = v.findViewById(R.id.replay_best_score_tv);
         bestScoreTv.setText(PreferenceHelper.getBestScoreGame(game,getActivity())+"");
         coinTv = v.findViewById(R.id.coinTv);
@@ -116,6 +126,18 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         coinTv.setText(coin+"");
 
 
+      /*  LinearLayout linear = (LinearLayout) v.findViewById(R.id.parentLayout);
+        AdView ad = new AdView(getActivity());
+        ad.setAdSize(AdSize.BANNER);
+        ad.setAdUnitId("ca-app-pub-8320045635693885/6995257268");
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("*************")
+                .build();
+
+
+        linear.addView(ad);
+        ad.loadAd(adRequest);  */
+
         builder.setCancelable(false);
         setCancelable(false);
         return builder.create();
@@ -129,10 +151,9 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         this.name = Utill.getGameName(game);
         this.coin = coin;
 
+        VariablesInGame.SHOW_REPLAY_COUNT++;
+        PreferenceHelper.setCountReplayShow(1);
         PreferenceHelper.addCoin(coin);
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
     }
 
     @Override
@@ -142,10 +163,6 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 listener.onBackClick();
                 break;
             case R.id.replay_replay:
-                if (isLoadInterstialAd & random.nextInt(4) == 0) {
-                    Log.d("tag", "random=4");
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                }
                 listener.onReplayClick();
                 break;
             case R.id.replay_setting:
@@ -157,11 +174,5 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
-    }
-
-    public void interstitialAdShow() {
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
     }
 }

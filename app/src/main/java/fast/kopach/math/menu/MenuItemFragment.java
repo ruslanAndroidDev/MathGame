@@ -22,8 +22,8 @@ import fast.kopach.math.games.Game1;
 import fast.kopach.math.games.Game2;
 import fast.kopach.math.games.Game3;
 import fast.kopach.math.games.Game4;
-import fast.kopach.math.games.Game5;
 import fast.kopach.math.games.Game6;
+import fast.kopach.math.games.Game5;
 
 /**
  * Created by Руслан on 11.09.2017.
@@ -87,7 +87,7 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (isOpen) {
+        if (PreferenceHelper.isOpenGame(position)) {
             switch (position) {
                 case 1:
                     intent.setClass(getContext(), Game1.class);
@@ -108,10 +108,10 @@ public class MenuItemFragment extends Fragment implements View.OnClickListener {
                     intent.setClass(getContext(), Game6.class);
                     break;
             }
-            startActivity(intent);
             Utill.playSound(getContext());
+            startActivity(intent);
         } else {
-            if (PreferenceHelper.getCoin() > PreferenceHelper.getPrice(position)) {
+            if (PreferenceHelper.getCoin() >= PreferenceHelper.getPrice(position)) {
                 unlockGame();
             } else {
                 Toast.makeText(getContext(), "You dont have enought maney", Toast.LENGTH_SHORT).show();

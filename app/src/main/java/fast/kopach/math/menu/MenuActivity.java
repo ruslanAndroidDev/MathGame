@@ -1,5 +1,6 @@
 package fast.kopach.math.menu;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -18,21 +19,21 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import fast.kopach.math.AppEvaluationDialog;
+import fast.kopach.math.Broadcast;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
+import fast.kopach.math.games.VariablesInGame;
 
 /**
  * Created by Руслан on 11.09.2017.
  */
 
-public class MenuActivity extends AppCompatActivity implements RewardedVideoAdListener {
+public class MenuActivity extends AppCompatActivity {
     ViewPager viewPager;
     MenuAdapter adapter;
     TextView tv_coin;
 
-    RewardedVideoAd rewardedVideoAd;
-
-    private AdView mAdView;
+    Broadcast broadcast;
     BottomSheetBehavior bottomSheetBehavior;
 
     @Override
@@ -42,98 +43,48 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
 
         LinearLayout llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
 
-// init the bottom sheet behavior
+        // init the bottom sheet behavior
         bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
-
-// change the state of the bottom sheet
+        // change the state of the bottom sheet
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
+        broadcast = new Broadcast();
+        startRepeatingTimer(); //Початок відліку часу, після чого з'явиться notification і скаже що користувач отримав в подарунок монети
 
         // Перше створення SharedPreff, не додумався куди вписати, тому написав тут
         PreferenceHelper.firstCreateSharedPref(this);
         PreferenceHelper.launchGame(this);
-        if (PreferenceHelper.getLauncheCount() == 5) {
-            showDialog();
-        }
-
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-8320045635693885~7488509104");
-        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        rewardedVideoAd.setRewardedVideoAdListener(this);
 
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         tv_coin = (TextView) findViewById(R.id.tv_coin);
-        //  loadRewardedVideoAd();
-    }
-
-    private void loadRewardedVideoAd() {
-        rewardedVideoAd.loadAd("ca-app-pub-8320045635693885/3778039399", new AdRequest.Builder().build());
-        Toast.makeText(this, "Завантаження реклами розпочалось", Toast.LENGTH_LONG).show();
-    }
-
-    public void showRewardedVideoAd() {
-        if (rewardedVideoAd.isLoaded()) {
-            rewardedVideoAd.show();
-            Toast.makeText(this, "Відео з рекламою завантажено", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Відео з рекламою не завантажено", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-
-    }
-
-    @Override
-    public void onRewarded(RewardItem rewardItem) {
-        Toast.makeText(this, "Ви отримали " + rewardItem.getAmount() + " " + rewardItem.getType(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int i) {
-
     }
 
     @Override
     public void onResume() {
-        rewardedVideoAd.resume(this);
+      //  rewardedVideoAd.resume(this);
         tv_coin.setText(PreferenceHelper.getCoin() + "");
+
+        if (PreferenceHelper.getCountReplayShow() > PreferenceHelper.getBoundaryForShowRate()){
+            if (PreferenceHelper.getShowRatedGame()){
+                showRateDialog();
+            }
+        }
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        rewardedVideoAd.pause(this);
+        // rewardedVideoAd.pause(this);
         //  showRewardedVideoAd();
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        rewardedVideoAd.destroy(this);
+      //  rewardedVideoAd.destroy(this);
         super.onDestroy();
     }
 
@@ -145,8 +96,17 @@ public class MenuActivity extends AppCompatActivity implements RewardedVideoAdLi
         }
     }
 
-    public void showDialog() {
+    public void showRateDialog() {
         AppEvaluationDialog dialog = new AppEvaluationDialog();
         dialog.show(getSupportFragmentManager(), "custom");
+    }
+
+    public void startRepeatingTimer(){
+      //  Context context= this.getApplicationContext();
+        if(broadcast!=null){
+            broadcast.SetAlarm(this);
+        }else{
+           // Toast.makeText(this,"Alarm is null", Toast.LENGTH_SHORT).show();
+        }
     }
 }

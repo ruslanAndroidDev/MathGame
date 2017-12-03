@@ -26,11 +26,12 @@ public class MenuAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new MenuItemFragment(R.drawable.texture3s, "More or less", 3, true);
             case 3:
-                return new MenuItemFragment(R.drawable.texture4, "In order", 4, true);
+                return new MenuItemFragment(R.drawable.texture4, "In order", 4, PreferenceHelper.isOpenGame(4));
             case 4:
-                return new MenuItemFragment(R.drawable.texture5, "Puzzle", 5, PreferenceHelper.isOpenGame(5));
-            case 5:
-                return new MenuItemFragment(R.drawable.texture6, "Detective", 6, PreferenceHelper.isOpenGame(6));
+                return new MenuItemFragment(R.drawable.texture5, "Detective", 5, PreferenceHelper.isOpenGame(5));
+           // case 5:
+               // return new MenuItemFragment(R.drawable.texture6, "Puzzle", 6, PreferenceHelper.isOpenGame(6));
+
         }
         return null;
     }
@@ -38,6 +39,6 @@ public class MenuAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 6;
+        return 5;
     }
 }

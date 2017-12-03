@@ -31,26 +31,34 @@ public class AppEvaluationDialog extends DialogFragment {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (rating.getRating() > 3){
-                            Intent intent_history_ukr = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=kopach.vova.zno_app"));
+                            Intent intent_history_ukr = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=fast.kopach.math"));
                             startActivity(intent_history_ukr);
+                            PreferenceHelper.setShowDialogRatedGame(false);
                         }
                         dialog.dismiss();
                     }
                 })
 
-                .setNeutralButton("Later",
+                .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                PreferenceHelper.setShowDialogRatedGame(false);
                                 dialog.cancel();
                             }
                         })
 
-                .setNegativeButton("Cancel",
+                .setNeutralButton("Later",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                PreferenceHelper.setLaterBoundaryForShowRate();
+                                PreferenceHelper.setShowDialogRatedGame(true);
                                 dialog.cancel();
                             }
                         });
+
+
+        builder.setCancelable(false);
+        setCancelable(false);
 
         return builder.create();
     }

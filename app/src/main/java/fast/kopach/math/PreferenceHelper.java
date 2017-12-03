@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import fast.kopach.math.games.VariablesInGame;
+import fast.kopach.math.menu.MenuItemFragment;
+
 /**
  * Created by Руслан on 17.09.2017.
  */
@@ -75,8 +78,10 @@ public class PreferenceHelper {
     }
 
     public static int getPrice(int position) {
-        if (position == 5) {
-            return 100;
+        if (position == 4){
+            return 150;
+        }else if (position == 5) {
+            return 200;
         } else if (position == 6) {
             return 200;
         }
@@ -93,5 +98,36 @@ public class PreferenceHelper {
 
     public static int getLauncheCount() {
         return sharedPreferences.getInt("launche", 0);
+    }
+
+    public static int getCountReplayShow(){
+        return sharedPreferences.getInt("count replay show", 0);
+    }
+
+    public static void setCountReplayShow(int add) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("count replay show", getCountReplayShow() + add);
+        editor.commit();
+    }
+
+
+    public static boolean getShowRatedGame(){
+        return sharedPreferences.getBoolean("rated game", true);
+    }
+
+    public static void setShowDialogRatedGame(boolean ratedGame) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("rated game", ratedGame);
+        editor.commit();
+    }
+
+    public static int getBoundaryForShowRate(){
+        return sharedPreferences.getInt("boundary for show rate", VariablesInGame.BOUNDARY_FOR_SHOW_RATE);
+    }
+
+    public static void setLaterBoundaryForShowRate() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("boundary for show rate", getCountReplayShow() + 30);
+        editor.commit();
     }
 }

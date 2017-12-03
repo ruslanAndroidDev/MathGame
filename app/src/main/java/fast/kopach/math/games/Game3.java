@@ -113,6 +113,7 @@ public class Game3 extends AppCompatActivity {
     }
 
     void showDialog() {
+        headerFragment.stopTimer();
         replayDialog.show(getFragmentManager(), myScore,3,myScore/2, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
