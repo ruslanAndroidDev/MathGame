@@ -23,6 +23,7 @@ import fast.kopach.math.Broadcast;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.games.VariablesInGame;
+import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by Руслан on 11.09.2017.
@@ -58,6 +59,8 @@ public class MenuActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(viewPager);
 
         tv_coin = (TextView) findViewById(R.id.tv_coin);
     }
@@ -88,13 +91,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public void onMenuButtonClick(View view) {
-        if (view.getId() == R.id.btn_exit) {
-            finish();
-        } else if (view.getId() == R.id.btn_setting) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        }
-    }
+//    public void onMenuButtonClick(View view) {
+//        if (view.getId() == R.id.btn_exit) {
+//            finish();
+//        } else if (view.getId() == R.id.btn_setting) {
+//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+//        }
+//    }
 
     public void showRateDialog() {
         AppEvaluationDialog dialog = new AppEvaluationDialog();
