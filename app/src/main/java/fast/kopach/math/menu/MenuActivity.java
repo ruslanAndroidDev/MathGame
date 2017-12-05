@@ -1,38 +1,32 @@
 package fast.kopach.math.menu;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import fast.kopach.math.AppEvaluationDialog;
 import fast.kopach.math.Broadcast;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
-import fast.kopach.math.games.VariablesInGame;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by Руслан on 11.09.2017.
  */
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     ViewPager viewPager;
     MenuAdapter adapter;
     TextView tv_coin;
+    Switch soundSwitch;
 
     Broadcast broadcast;
     BottomSheetBehavior bottomSheetBehavior;
@@ -49,12 +43,16 @@ public class MenuActivity extends AppCompatActivity {
         // change the state of the bottom sheet
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
+        soundSwitch = (Switch) findViewById(R.id.soundSwitch);
+        soundSwitch.setOnCheckedChangeListener(this);
         broadcast = new Broadcast();
         startRepeatingTimer(); //Початок відліку часу, після чого з'явиться notification і скаже що користувач отримав в подарунок монети
 
         // Перше створення SharedPreff, не додумався куди вписати, тому написав тут
         PreferenceHelper.firstCreateSharedPref(this);
         PreferenceHelper.launchGame(this);
+
+        soundSwitch.setChecked(PreferenceHelper.isSoundOn());
 
         viewPager = (ViewPager) findViewById(R.id.menuViewPager);
         adapter = new MenuAdapter(getSupportFragmentManager());
@@ -67,11 +65,11 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-      //  rewardedVideoAd.resume(this);
+        //  rewardedVideoAd.resume(this);
         tv_coin.setText(PreferenceHelper.getCoin() + "");
 
-        if (PreferenceHelper.getCountReplayShow() > PreferenceHelper.getBoundaryForShowRate()){
-            if (PreferenceHelper.getShowRatedGame()){
+        if (PreferenceHelper.getCountReplayShow() > PreferenceHelper.getBoundaryForShowRate()) {
+            if (PreferenceHelper.getShowRatedGame()) {
                 showRateDialog();
             }
         }
@@ -87,29 +85,34 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-      //  rewardedVideoAd.destroy(this);
+        //  rewardedVideoAd.destroy(this);
         super.onDestroy();
     }
 
-//    public void onMenuButtonClick(View view) {
-//        if (view.getId() == R.id.btn_exit) {
-//            finish();
-//        } else if (view.getId() == R.id.btn_setting) {
-//            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//        }
-//    }
+    public void onMenuButtonClick(View view) {
+        if (view.getId() == R.id.btn_exit) {
+            finish();
+        } else if (view.getId() == R.id.btn_setting) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+    }
 
     public void showRateDialog() {
         AppEvaluationDialog dialog = new AppEvaluationDialog();
         dialog.show(getSupportFragmentManager(), "custom");
     }
 
-    public void startRepeatingTimer(){
-      //  Context context= this.getApplicationContext();
-        if(broadcast!=null){
+    public void startRepeatingTimer() {
+        //  Context context= this.getApplicationContext();
+        if (broadcast != null) {
             broadcast.SetAlarm(this);
-        }else{
-           // Toast.makeText(this,"Alarm is null", Toast.LENGTH_SHORT).show();
+        } else {
+            // Toast.makeText(this,"Alarm is null", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        PreferenceHelper.setSound(b);
     }
 }

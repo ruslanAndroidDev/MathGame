@@ -7,8 +7,6 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.util.DisplayMetrics;
 
-import fast.kopach.math.menu.MenuItemFragment;
-
 /**
  * Created by Руслан on 11.09.2017.
  */
@@ -71,12 +69,13 @@ public class Utill {
         if (mp == null) {
             mp = MediaPlayer.create(context, R.raw.click_sound);
         }
-        mp.start();
+        if (PreferenceHelper.isSoundOn()) {
+            mp.start();
+        }
     }
 
 
-
-    public static String getGameName(int game){
+    public static String getGameName(int game) {
         String gameName = "";
         switch (game) {
             case 1:
@@ -95,7 +94,7 @@ public class Utill {
                 gameName = "Puzzle";
                 break;
             case 6:
-                gameName =  "Detective";
+                gameName = "Detective";
                 break;
         }
 

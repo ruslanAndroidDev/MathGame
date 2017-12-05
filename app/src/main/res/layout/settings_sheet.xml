@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Sound"
         android:textSize="22sp"
+        android:id="@+id/soundSwitch"
         android:textColor="#3f51b5"
         android:layout_margin="10dp"/>
 

@@ -74,7 +74,7 @@ public class Game3 extends AppCompatActivity {
         example_left.setText(num1left + "\n" + num2left);
 
         //Створення рандомного числа від якого буде залежати коли буде приклад з відповідюю "="
-        int randomNumber = random.nextInt(4);
+        int randomNumber = random.nextInt(10);
         //Якщо рандомне число буде дорівнювати 1, то правий приклад буде створюватись так щоб його сума/різниця дорівнювали сумі/різниці лівого прикладу
         if (randomNumber == 1 ){
             int num1Right = random.nextInt(30 + myScore * 5);

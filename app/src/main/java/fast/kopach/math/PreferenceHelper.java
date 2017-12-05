@@ -73,6 +73,18 @@ public class PreferenceHelper {
     public static int getCoin() {
         return sharedPreferences.getInt("coin", 0);
     }
+    public static void setSound(boolean sound){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("sound", sound);
+
+        Log.d(TAG, "Set Sound setting " + sound);
+
+        editor.commit();
+    }
+
+    public static boolean isSoundOn(){
+        return sharedPreferences.getBoolean("sound",true);
+    }
 
     public static void firstCreateSharedPref(Context context) {
     }
