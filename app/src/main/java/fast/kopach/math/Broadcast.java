@@ -44,8 +44,6 @@ public class Broadcast extends BroadcastReceiver{
         }
         Format formatter=new SimpleDateFormat("hh:mm:ss a");
         msgStr.append(formatter.format(new Date()));
-
-       // Toast.makeText(context, msgStr + "hgkjdl", Toast.LENGTH_LONG).show();
         sendBigTextStyleNotification(context);
 
         //Разблокируем поток.

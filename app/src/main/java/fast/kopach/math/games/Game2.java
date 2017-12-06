@@ -1,9 +1,7 @@
 package fast.kopach.math.games;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -57,11 +55,11 @@ public class Game2 extends AppCompatActivity {
 
     private void buildGame() {
         if (errorClickedBtn != null) {
-            //errorClickedBtn.setColor(Color.parseColor("#4775ba"));
+            errorClickedBtn.setBackground(getResources().getDrawable(R.drawable.game5btn_norm));
         }
         int propysk = random.nextInt(3);
-        int number1 = random.nextInt(25) + random.nextInt((score +1)* 5);
-        int number2 = random.nextInt(25) + random.nextInt((score +1)* 4);
+        int number1 = random.nextInt(25) + random.nextInt((score + 1) * 5);
+        int number2 = random.nextInt(25) + random.nextInt((score + 1) * 4);
         int znak = random.nextInt(2);
         switch (propysk) {
             case 0:  // пропуск в першого числа
@@ -79,10 +77,10 @@ public class Game2 extends AppCompatActivity {
                 true_answer = number2;
                 if (znak == 0) {
                     int result = number1 + number2;
-                    taskStr = "<font color=#000000>" + number1 + " +</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
+                    taskStr = "<font color=#000000>" + number1 + " +</font> <font color=#4000FF> ? </font>" + "<font color=#000000>= " + result + "</font>";
                 } else {
                     int result = number1 - number2;
-                    taskStr = "<font color=#000000>" + number1 + " -</font> <font color=#4000FF> ? </font>"  + "<font color=#000000>= " + result + "</font>";
+                    taskStr = "<font color=#000000>" + number1 + " -</font> <font color=#4000FF> ? </font>" + "<font color=#000000>= " + result + "</font>";
                 }
                 break;
 
@@ -110,17 +108,27 @@ public class Game2 extends AppCompatActivity {
 
     private void fillVariants() {
         for (int i = 0; i < 6; i++) {
-            buttonArray[i].setText(random.nextInt(25) + random.nextInt((score+1) * 5) + "");
+            buttonArray[i].setText(random.nextInt(25) + random.nextInt((score + 1) * 5) + "");
         }
-
         int trueBtn = random.nextInt(6);
         buttonArray[trueBtn].setText(true_answer + "");
+        checkIsUnique();
+    }
+
+    private void checkIsUnique() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 1 + i; j < buttonArray.length; j++) {
+                if (buttonArray[i].getText().equals(buttonArray[j].getText())) {
+                    buttonArray[i].setText(random.nextInt(25) + random.nextInt((score + 1) * 5) + "");
+                    checkIsUnique();
+                }
+            }
+        }
     }
 
     public void onClickGame2(final View view) {
         final View view1 = view;
         if (Integer.parseInt(((Button) view).getText().toString()) == true_answer) {
-            //((SquareButton) view).setColor(Color.GREEN);
             score += 1;
             if (score > bestScore) {
                 bestScore = score;
@@ -128,22 +136,23 @@ public class Game2 extends AppCompatActivity {
                 headerFragment.setBestScore(bestScore);
             }
             headerFragment.setScore(score);
+            ((SquareButton) view1).setBackground(getResources().getDrawable(R.drawable.game5btn_true));
             handler.postDelayed(new Runnable() {
                 public void run() {
-              //      ((SquareButton) view1).setColor(ContextCompat.getColor(Game2.this, R.color.game2Btn));
+                    ((SquareButton) view1).setBackground(getResources().getDrawable(R.drawable.game5btn_norm));
                     buildGame();
                 }
             }, 500);
         } else {
             errorClickedBtn = (SquareButton) view;
-            //errorClickedBtn.setColor(Color.RED);
+            errorClickedBtn.setBackground(getResources().getDrawable(R.drawable.game5btn_error));
             showDialog();
         }
     }
 
     void showDialog() {
         headerFragment.stopTimer();
-        replayDialog.show(getFragmentManager(), score,2,score/2, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), score, 2, score / 2, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 score = 0;

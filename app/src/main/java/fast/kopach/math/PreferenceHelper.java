@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import fast.kopach.math.games.VariablesInGame;
-import fast.kopach.math.menu.MenuItemFragment;
 
 /**
  * Created by Руслан on 17.09.2017.
@@ -75,7 +74,8 @@ public class PreferenceHelper {
     public static int getCoin() {
         return sharedPreferences.getInt("coin", 0);
     }
-    public static void setSound(boolean sound){
+
+    public static void setSound(boolean sound) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("sound", sound);
 
@@ -84,17 +84,17 @@ public class PreferenceHelper {
         editor.commit();
     }
 
-    public static boolean isSoundOn(){
-        return sharedPreferences.getBoolean("sound",true);
+    public static boolean isSoundOn() {
+        return sharedPreferences.getBoolean("sound", true);
     }
 
     public static void firstCreateSharedPref(Context context) {
     }
 
     public static int getPrice(int position) {
-        if (position == 4){
+        if (position == 4) {
             return 1;
-        }else if (position == 5) {
+        } else if (position == 5) {
             return 2;
         } else if (position == 6) {
             return 200;
@@ -114,7 +114,7 @@ public class PreferenceHelper {
         return sharedPreferences.getInt("launche", 0);
     }
 
-    public static int getCountReplayShow(){
+    public static int getCountReplayShow() {
         return sharedPreferences.getInt("count replay show", 0);
     }
 
@@ -125,7 +125,7 @@ public class PreferenceHelper {
     }
 
 
-    public static boolean getShowRatedGame(){
+    public static boolean getShowRatedGame() {
         return sharedPreferences.getBoolean("rated game", true);
     }
 
@@ -135,7 +135,7 @@ public class PreferenceHelper {
         editor.commit();
     }
 
-    public static int getBoundaryForShowRate(){
+    public static int getBoundaryForShowRate() {
         return sharedPreferences.getInt("boundary for show rate", VariablesInGame.BOUNDARY_FOR_SHOW_RATE);
     }
 

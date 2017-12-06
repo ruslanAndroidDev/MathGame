@@ -35,33 +35,24 @@ public class Advertising implements RewardedVideoAdListener {
         mInterstitialAd.setAdUnitId("ca-app-pub-8320045635693885/7405754217");
     }
 
-    //////////////////////////////////////////////////
-
     public void loadInterstitialAd(){
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-      //  Toast.makeText(context, "loadInterstitialAd", Toast.LENGTH_SHORT).show();
     }
 
     public void showInterstitialAd(){
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
-        }//else { Toast.makeText(context, "Відео не завантажено", Toast.LENGTH_SHORT).show();}
+        }
     }
-
-    ///////////////////////////////////////////////////////
 
     public void loadRewardedVideoAd(Context context) {
         rewardedVideoAd.loadAd("ca-app-pub-8320045635693885/3778039399", new AdRequest.Builder().build());
-       // Toast.makeText(context, "Завантаження реклами розпочалось", Toast.LENGTH_LONG).show();
     }
 
     public void showRewardedVideoAd(Context context) {
         if (rewardedVideoAd.isLoaded()) {
             rewardedVideoAd.show();
-           // Toast.makeText(context, "Відео з рекламою завантажено", Toast.LENGTH_LONG).show();
-        } //else {
-          //  Toast.makeText(context, "Відео з рекламою не завантажено", Toast.LENGTH_LONG).show();
-       // }
+        }
     }
 
 
@@ -87,7 +78,6 @@ public class Advertising implements RewardedVideoAdListener {
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-       // Toast.makeText(context, "Ви отримали " + rewardItem.getAmount() + " " + rewardItem.getType(), Toast.LENGTH_LONG).show();
     }
 
     @Override

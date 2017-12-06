@@ -1,6 +1,5 @@
 package fast.kopach.math.dialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -19,20 +18,15 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.util.Random;
 
 import fast.kopach.math.Advertising;
-import fast.kopach.math.AppEvaluationDialog;
-import fast.kopach.math.Calculation;
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
 import fast.kopach.math.Utill;
-import fast.kopach.math.games.HeaderFragment;
 import fast.kopach.math.games.VariablesInGame;
 
 /**
@@ -42,9 +36,9 @@ import fast.kopach.math.games.VariablesInGame;
 public class ReplayDialog extends DialogFragment implements View.OnClickListener {
     Advertising advertising;
     ReplayListener listener;
-    ImageView replay,setting,back;
+    ImageView replay, setting, back;
     private int score;
-    TextView scoreTv, tvGameName,coinTv,bestScoreTv;
+    TextView scoreTv, tvGameName, coinTv, bestScoreTv;
     Random random;
     InfoDialog infoDialog;
 
@@ -74,16 +68,16 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
 
         //Алгоритм що вирішує коли буде нативна а коли міжсторінкова реклама
         VariablesInGame.isShowInterstitialAd = false;
-        for (int i = 0; i < VariablesInGame.boundary_point_show_replay_for_ad.length; i++){
-            if (VariablesInGame.SHOW_REPLAY_COUNT == VariablesInGame.boundary_point_show_replay_for_ad[i]){
+        for (int i = 0; i < VariablesInGame.boundary_point_show_replay_for_ad.length; i++) {
+            if (VariablesInGame.SHOW_REPLAY_COUNT == VariablesInGame.boundary_point_show_replay_for_ad[i]) {
                 advertising.loadInterstitialAd();
-            }else if (VariablesInGame.SHOW_REPLAY_COUNT - 1 == VariablesInGame.boundary_point_show_replay_for_ad[i]){
+            } else if (VariablesInGame.SHOW_REPLAY_COUNT - 1 == VariablesInGame.boundary_point_show_replay_for_ad[i]) {
                 VariablesInGame.isShowInterstitialAd = true;
                 advertising.showInterstitialAd();
             }
         }
 
-        if (!VariablesInGame.isShowInterstitialAd){
+        if (!VariablesInGame.isShowInterstitialAd) {
             final NativeExpressAdView adView = new NativeExpressAdView(getActivity());
             parentLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
@@ -112,7 +106,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         }
 
         bestScoreTv = v.findViewById(R.id.replay_best_score_tv);
-        bestScoreTv.setText(PreferenceHelper.getBestScoreGame(game,getActivity())+"");
+        bestScoreTv.setText(PreferenceHelper.getBestScoreGame(game, getActivity()) + "");
         coinTv = v.findViewById(R.id.coinTv);
         replay = v.findViewById(R.id.replay_replay);
         replay.setOnClickListener(this);
@@ -125,9 +119,9 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         tvGameName = v.findViewById(R.id.tv_game_name);
         scoreTv.setText("" + score);
         tvGameName.setText(name);
-        coinTv.setText(coin+"");
+        coinTv.setText(coin + "");
 
-        setColorTextScore(score, PreferenceHelper.getBestScoreGame(game,getActivity()));
+        setColorTextScore(score, PreferenceHelper.getBestScoreGame(game, getActivity()));
 
 
       /*  LinearLayout linear = (LinearLayout) v.findViewById(R.id.parentLayout);
@@ -147,7 +141,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         return builder.create();
     }
 
-    public void show(FragmentManager manager, int score,int game,int coin, ReplayListener listener) {
+    public void show(FragmentManager manager, int score, int game, int coin, ReplayListener listener) {
         super.show(manager, "");
         this.listener = listener;
         this.score = score;
@@ -181,10 +175,10 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onBackClick();
     }
 
-    public void setColorTextScore(int score, int bestScore){
-        if (score == bestScore){
+    public void setColorTextScore(int score, int bestScore) {
+        if (score == bestScore) {
             scoreTv.setTextColor(Color.parseColor("#388e3c"));
-        }else {
+        } else {
             scoreTv.setTextColor(Color.parseColor("#4775ba"));
         }
     }

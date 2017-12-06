@@ -42,8 +42,6 @@ public class InfoDialog extends DialogFragment {
         tvClose = (TextView) v.findViewById(R.id.info_tv_close);
         ImageView iView = (ImageView) v.findViewById(R.id.iv_game);
 
-//        tvGameName.setText(Utill.getGameName(PreferenceHelper.launchedGame));
-
         //Налаштування виводу меж в рівнях в залежності від гри
         switch (PreferenceHelper.launchedGame) {
             case 1:

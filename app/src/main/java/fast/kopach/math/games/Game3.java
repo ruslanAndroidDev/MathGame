@@ -2,6 +2,7 @@ package fast.kopach.math.games;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class Game3 extends AppCompatActivity {
     int bestScore;
     ReplayDialog replayDialog;
     SquareButton errorClickedBtn;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class Game3 extends AppCompatActivity {
         bestScore = PreferenceHelper.getBestScoreGame(3,this);
         headerFragment.setBestScore(bestScore);
         replayDialog = new ReplayDialog(this);
+
+        handler = new Handler();
 
         buildGame();
     }
@@ -136,14 +140,14 @@ public class Game3 extends AppCompatActivity {
             case "<":
                 if (sum_left < sum_right) {
                     myScore++;
-                    buildGame();
+                    showTrueAnswer(view);
                 } else {
                     showReplay(view);
                 }
                 break;
             case "=":
                 if (sum_left == sum_right) {
-                    buildGame();
+                    showTrueAnswer(view);
                     myScore++;
                 } else {
                     showReplay(view);
@@ -151,7 +155,7 @@ public class Game3 extends AppCompatActivity {
                 break;
             case ">":
                 if (sum_left > sum_right) {
-                    buildGame();
+                    showTrueAnswer(view);
                     myScore++;
                 } else {
                     showReplay(view);
@@ -164,6 +168,17 @@ public class Game3 extends AppCompatActivity {
             headerFragment.setBestScore(bestScore);
         }
         headerFragment.setScore(myScore);
+    }
+
+    private void showTrueAnswer(final View view) {
+        view.setBackgroundColor(Color.GREEN);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.setBackgroundColor(Color.parseColor("#4775ba"));
+                buildGame();
+            }
+        }, 500);
     }
 
     private void showReplay(final View view) {

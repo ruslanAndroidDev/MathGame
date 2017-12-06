@@ -1,16 +1,5 @@
 package fast.kopach.math;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
-import fast.kopach.math.games.VariablesInGame;
-
-import static java.security.AccessController.getContext;
-
 /**
  * Created by Vova on 20.09.2017.
  */
