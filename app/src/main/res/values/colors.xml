@@ -9,4 +9,6 @@
     <color name="green">#6abd2b</color>
     <color name="red">#ed3b27</color>
     <color name="blue">#0066FF</color>
+    <color name="redForReplay">#b71c1c</color>
+    <color name="greenForReplay">#388e3c</color>
 </resources>

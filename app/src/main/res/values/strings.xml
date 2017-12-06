@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Math</string>
+    <string name="app_name">Math Brain</string>
     <string name="_25">25\n35</string>
+
+    <string name="appAdID">ca-app-pub-8320045635693885~7488509104</string>
 
     <string name="nativeAdView1">ca-app-pub-8320045635693885/5699287859</string>
     <string name="bannerAdView1">ca-app-pub-8320045635693885/6995257268</string>

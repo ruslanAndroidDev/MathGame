@@ -71,7 +71,7 @@ public class Broadcast extends BroadcastReceiver{
                 .setTicker("You got a gift")  //Ви отримали подарунок!
                 .setContentTitle("Gift")  //Подарунок
                 .setContentText("You have received 10 gift coins")  //Вам в подарунок нараховано 10 монет
-                .setSmallIcon(R.drawable.coin)
+                .setSmallIcon(R.drawable.coin_128x128)
                 .setContentIntent(pIntent)
                // .addAction(R.mipmap.ic_launcher, "Запустити гру", pIntent).setAutoCancel(true)
                 .setPriority(Notification.PRIORITY_HIGH);

@@ -46,6 +46,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
     private int score;
     TextView scoreTv, tvGameName,coinTv,bestScoreTv;
     Random random;
+    InfoDialog infoDialog;
 
     Context context;
     private int coin;
@@ -68,6 +69,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.replay_dialog, null);
         builder.setView(v);
         final View parentLayout = v.findViewById(R.id.parentLayout);
+
+        infoDialog = new InfoDialog(context);
 
         //Алгоритм що вирішує коли буде нативна а коли міжсторінкова реклама
         VariablesInGame.isShowInterstitialAd = false;
@@ -124,6 +127,8 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         tvGameName.setText(name);
         coinTv.setText(coin+"");
 
+        setColorTextScore(score, PreferenceHelper.getBestScoreGame(game,getActivity()));
+
 
       /*  LinearLayout linear = (LinearLayout) v.findViewById(R.id.parentLayout);
         AdView ad = new AdView(getActivity());
@@ -165,6 +170,7 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
                 listener.onReplayClick();
                 break;
             case R.id.replay_setting:
+                infoDialog.show(getFragmentManager());
                 break;
         }
     }
@@ -173,5 +179,13 @@ public class ReplayDialog extends DialogFragment implements View.OnClickListener
         abstract void onReplayClick();
 
         abstract void onBackClick();
+    }
+
+    public void setColorTextScore(int score, int bestScore){
+        if (score == bestScore){
+            scoreTv.setTextColor(Color.parseColor("#388e3c"));
+        }else {
+            scoreTv.setTextColor(Color.parseColor("#4775ba"));
+        }
     }
 }

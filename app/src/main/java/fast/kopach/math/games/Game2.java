@@ -36,6 +36,8 @@ public class Game2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game2);
 
+        PreferenceHelper.launchedGame = 2;
+
         random = new Random();
         tv2 = findViewById(R.id.tv2);
         variantbtn1 = findViewById(R.id.btn2);

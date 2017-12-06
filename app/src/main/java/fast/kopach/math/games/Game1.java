@@ -42,7 +42,7 @@ public class Game1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game1);
 
-        MobileAds.initialize(this, "ca-app-pub-8320045635693885~7488509104");
+        PreferenceHelper.launchedGame = 1;
 
         textView = (TextView) findViewById(R.id.textView);
         random = new Random();

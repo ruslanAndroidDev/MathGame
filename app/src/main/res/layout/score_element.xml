@@ -15,21 +15,27 @@
         android:textSize="24sp" />
 
     <TextView
+        android:id="@+id/timerTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20"
+        android:layout_alignBaseline="@+id/tv_score"
+        android:layout_alignBottom="@+id/tv_score"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="24sp"
-        android:id="@+id/timerTv"/>
+        android:text="15"
+        android:textColor="#212121"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_bs"
+        android:layout_alignBottom="@+id/tv_bs"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:text="Score: 0"
         android:textSize="24sp" />
 </RelativeLayout>

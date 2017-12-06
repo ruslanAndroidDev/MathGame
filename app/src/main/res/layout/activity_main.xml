@@ -31,13 +31,13 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Fast math"
-        android:textColor="#283593"
-        android:textSize="40sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Math Brain"
+            android:textColor="#283593"
+            android:textSize="40sp" />
 
 
     <android.support.v4.view.ViewPager

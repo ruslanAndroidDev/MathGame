@@ -2,11 +2,16 @@ package fast.kopach.math.dialogs;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
@@ -18,12 +23,12 @@ import fast.kopach.math.games.VariablesInGame;
  */
 
 public class InfoDialog extends DialogFragment {
-
-    TextView tvScore1, tvScore2, tvScore3, tvScore4, tvScore5, tvCoin1, tvCoin2, tvCoin3, tvCoin4, tvCoin5, tvGameName;
     TextView tvClose;
+    Context context;
+    int drawableForInfo = 0;
 
-    public InfoDialog() {
-        // this.context = context;
+    public InfoDialog(Context context) {
+         this.context = context;
     }
 
 
@@ -33,63 +38,36 @@ public class InfoDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_info_about_coin, null);
         builder.setView(v);
-        tvScore1 = (TextView) v.findViewById(R.id.info_tv_score_1);
-        tvScore2 = (TextView) v.findViewById(R.id.info_tv_score_2);
-        tvScore3 = (TextView) v.findViewById(R.id.info_tv_score_3);
-        tvScore4 = (TextView) v.findViewById(R.id.info_tv_score_4);
-        tvScore5 = (TextView) v.findViewById(R.id.info_tv_score_5);
-        tvCoin1 = (TextView) v.findViewById(R.id.info_tv_coin_1);
-        tvCoin2 = (TextView) v.findViewById(R.id.info_tv_coin_2);
-        tvCoin3 = (TextView) v.findViewById(R.id.info_tv_coin_3);
-        tvCoin4 = (TextView) v.findViewById(R.id.info_tv_coin_4);
-        tvCoin5 = (TextView) v.findViewById(R.id.info_tv_coin_5);
-        tvGameName = (TextView) v.findViewById(R.id.info_tv_game_name);
-        tvClose = (TextView) v.findViewById(R.id.info_tv_close);
 
-        TextView tvScore[] = {tvScore1, tvScore2, tvScore3, tvScore4, tvScore5};
-        TextView tvCoin[] = {tvCoin1, tvCoin2, tvCoin3, tvCoin4, tvCoin5};
+        tvClose = (TextView) v.findViewById(R.id.info_tv_close);
+        ImageView iView = (ImageView) v.findViewById(R.id.iv_game);
 
 //        tvGameName.setText(Utill.getGameName(PreferenceHelper.launchedGame));
 
-
         //Налаштування виводу меж в рівнях в залежності від гри
-//        switch (PreferenceHelper.launchedGame) {
-//            case 1:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[0][i]);
-//                }
-//                break;
-//            case 2:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[1][i]);
-//                }
-//                break;
-//            case 3:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[2][i]);
-//                }
-//                break;
-//            case 4:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[3][i]);
-//                }
-//                break;
-//            case 5:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[4][i]);
-//                }
-//                break;
-//            case 6:
-//                for (int i = 0; i <= 4; i++) {
-//                    tvScore[i].setText("" + VariablesInGame.ARRAY_GAME_SCORE_BOUNDARY_POINT[5][i]);
-//                }
-//                break;
-//        }
-
-        //Налаштування виводу монет в рівнях в залежності від гри
-        for (int i = 0; i <= 4; i++) {
-            tvCoin[i].setText("" + VariablesInGame.ARRAY_GAME_ADD_COIN[i]);
+        switch (PreferenceHelper.launchedGame) {
+            case 1:
+               drawableForInfo = R.drawable.game_1;
+                break;
+            case 2:
+                drawableForInfo = R.drawable.game_1;
+                break;
+            case 3:
+                drawableForInfo = R.drawable.game_1;
+                break;
+            case 4:
+                drawableForInfo = R.drawable.game_1;
+                break;
+            case 5:
+                drawableForInfo = R.drawable.game_1;
+                break;
+            case 6:
+                drawableForInfo = R.drawable.game_1;
+                break;
         }
+
+        Glide.with(context).
+                load(drawableForInfo).into(iView);
 
         tvClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +78,9 @@ public class InfoDialog extends DialogFragment {
 
         builder.setCancelable(false);
         return builder.create();
+    }
+
+    public void show(FragmentManager fragmentManager) {
+        super.show(fragmentManager, "");
     }
 }

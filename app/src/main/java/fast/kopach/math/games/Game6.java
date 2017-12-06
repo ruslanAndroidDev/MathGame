@@ -21,6 +21,9 @@ public class Game6 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game5);
+
+        PreferenceHelper.launchedGame = 6;
+
         replayDialog = new ReplayDialog(this);
 
         puzzleGameView = (PuzzleGameView) findViewById(R.id.puzzleView);

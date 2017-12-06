@@ -36,6 +36,7 @@ public class Game3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game3);
+        PreferenceHelper.launchedGame = 3;
         headerFragment = (HeaderFragment) getSupportFragmentManager().findFragmentById(R.id.header);
         random = new Random();
         example_left = (TextView) findViewById(R.id.example_left);

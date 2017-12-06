@@ -31,18 +31,19 @@ public class HeaderFragment extends Fragment {
         best_score_tv = (TextView) v.findViewById(R.id.tv_bs);
         score_tv = (TextView) v.findViewById(R.id.tv_score);
         timerTv = (TextView) v.findViewById(R.id.timerTv);
+        setScore(0);
         return v;
     }
 
     public void setScore(int score) {
-        String text = "<font color=#ff000000>Score: </font> <font color=#0404B4>" + score + "</font>";
+        String text = "<font color=#ff000000>Score: </font> <font color=#4775ba>" + score + "</font>";
         score_tv.setText(Html.fromHtml(text));
 
     }
 
     public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
-        String text = "<font color=#ff000000>BS: </font> <font color=#0404B4>" + bestScore + "</font>";
+        String text = "<font color=#ff000000>BS: </font> <font color=#388e3c>" + bestScore + "</font>";
         best_score_tv.setText(Html.fromHtml(text));
     }
 

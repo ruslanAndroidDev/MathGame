@@ -34,6 +34,8 @@ public class Game5 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game6);
 
+        PreferenceHelper.launchedGame = 5;
+
         btnDrawable = getResources().getDrawable(R.drawable.rounded_btn);
         trueDrawable = getResources().getDrawable(R.drawable.true_rounded_btn);
         falseDrawable = getResources().getDrawable(R.drawable.error_rounded_btn);

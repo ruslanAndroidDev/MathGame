@@ -15,6 +15,8 @@ public class PreferenceHelper {
     static String PREFERENCE_NAME = "fastMathPref";
     static SharedPreferences sharedPreferences;
 
+    public static int launchedGame;
+
     private static final String TAG = "myLogs";
 
 
@@ -91,9 +93,9 @@ public class PreferenceHelper {
 
     public static int getPrice(int position) {
         if (position == 4){
-            return 150;
+            return 1;
         }else if (position == 5) {
-            return 200;
+            return 2;
         } else if (position == 6) {
             return 200;
         }
@@ -139,7 +141,7 @@ public class PreferenceHelper {
 
     public static void setLaterBoundaryForShowRate() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("boundary for show rate", getCountReplayShow() + 30);
+        editor.putInt("boundary for show rate", getCountReplayShow() + 40);
         editor.commit();
     }
 }
