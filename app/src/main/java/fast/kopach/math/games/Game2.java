@@ -55,7 +55,7 @@ public class Game2 extends AppCompatActivity {
 
     private void buildGame() {
         if (errorClickedBtn != null) {
-            errorClickedBtn.setColor(Color.parseColor("#4775ba"));
+            //errorClickedBtn.setColor(Color.parseColor("#4775ba"));
         }
         int propysk = random.nextInt(3);
         int number1 = random.nextInt(25) + random.nextInt((score +1)* 5);
@@ -118,7 +118,7 @@ public class Game2 extends AppCompatActivity {
     public void onClickGame2(final View view) {
         final View view1 = view;
         if (Integer.parseInt(((Button) view).getText().toString()) == true_answer) {
-            ((SquareButton) view).setColor(Color.GREEN);
+            //((SquareButton) view).setColor(Color.GREEN);
             score += 1;
             if (score > bestScore) {
                 bestScore = score;
@@ -128,13 +128,13 @@ public class Game2 extends AppCompatActivity {
             headerFragment.setScore(score);
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    ((SquareButton) view1).setColor(ContextCompat.getColor(Game2.this, R.color.game2Btn));
+              //      ((SquareButton) view1).setColor(ContextCompat.getColor(Game2.this, R.color.game2Btn));
                     buildGame();
                 }
             }, 500);
         } else {
             errorClickedBtn = (SquareButton) view;
-            errorClickedBtn.setColor(Color.RED);
+            //errorClickedBtn.setColor(Color.RED);
             showDialog();
         }
     }

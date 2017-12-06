@@ -116,7 +116,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/game5btn_norm"
             android:clickable="true"
             android:padding="5dp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/round_button"
+            android:background="@drawable/game5btn_norm"
             android:clickable="true"
             android:padding="5dp"
             android:src="@drawable/ic_refresh_black_24dp" />
@@ -139,7 +139,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/round_button"
+            android:background="@drawable/game5btn_norm"
             android:clickable="true"
             android:padding="5dp"
             android:src="@drawable/ic_info_outline_black_24dp" />

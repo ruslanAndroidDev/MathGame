@@ -1,6 +1,6 @@
 package fast.kopach.math.games;
 
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +22,9 @@ public class Game5 extends AppCompatActivity {
     String pryklad;
     Button trueBtn;
     Handler handler;
+    Drawable btnDrawable;
+    Drawable trueDrawable;
+    Drawable falseDrawable;
     private HeaderFragment headerFragment;
     ReplayDialog replayDialog;
 
@@ -30,6 +33,10 @@ public class Game5 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game6);
+
+        btnDrawable = getResources().getDrawable(R.drawable.rounded_btn);
+        trueDrawable = getResources().getDrawable(R.drawable.true_rounded_btn);
+        falseDrawable = getResources().getDrawable(R.drawable.error_rounded_btn);
 
         btn1 = (Button) findViewById(R.id.game6_btn1);
         btn2 = (Button) findViewById(R.id.game6_btn2);
@@ -55,19 +62,19 @@ public class Game5 extends AppCompatActivity {
                 headerFragment.setBestScore(bestScore);
             }
             headerFragment.setScore(score);
-            view.setBackgroundColor(Color.GREEN);
+            view.setBackground(trueDrawable);
             handler.postDelayed(new Runnable() {
                 public void run() {
                     buildGame();
-                    view.setBackgroundColor(Color.parseColor("#4370c2"));
+                    view.setBackground(btnDrawable);
                 }
             }, 500);
         } else {
-            view.setBackgroundColor(Color.RED);
+            view.setBackground(falseDrawable);
             showDialog();
             handler.postDelayed(new Runnable() {
                 public void run() {
-                    view.setBackgroundColor(Color.parseColor("#4370c2"));
+                    view.setBackground(btnDrawable);
                 }
             }, 500);
         }
@@ -119,7 +126,7 @@ public class Game5 extends AppCompatActivity {
 
     void showDialog() {
         headerFragment.stopTimer();
-        replayDialog.show(getFragmentManager(), score,6,score*4, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), score, 6, score * 4, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 score = 0;

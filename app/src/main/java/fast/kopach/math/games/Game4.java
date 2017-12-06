@@ -85,8 +85,8 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
     private void checkIsTrueAnswer(final SquareButton clickedBtn) {
         if (valuesForCheck.get(0) == Integer.parseInt(clickedBtn.getText().toString())) {
             valuesForCheck.remove(0);
-            clickedBtn.setSelected(true);
             clickedBtn.setClickable(false);
+            clickedBtn.setBackground(getResources().getDrawable(R.drawable.game5btn_pressed));
             Log.d("tag", "size" + valuesForCheck.size());
             if (valuesForCheck.size() == 0) {
                 score += 1;
@@ -106,7 +106,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
                 }, 1000);
             }
         } else {
-            clickedBtn.setColor(Color.RED);
+            clickedBtn.setBackground(getResources().getDrawable(R.drawable.game5btn_error));
             headerFragment.stopTimer();
             replayDialog.show(getFragmentManager(), score,4,score*5, this);
         }
@@ -114,16 +114,14 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
 
     public void paintAllButtonGreen() {
         for (int i = 0; i < num_of_btn; i++) {
-            buttonsArray[i].setSelected(false);
-            buttonsArray[i].setColor(Color.GREEN);
+            buttonsArray[i].setBackground(getResources().getDrawable(R.drawable.game5btn_true));
         }
     }
 
     public void paintAllButtonStandart() {
         for (int i = 0; i < num_of_btn; i++) {
             buttonsArray[i].setClickable(true);
-            buttonsArray[i].setSelected(false);
-            buttonsArray[i].setColor(Color.parseColor("#4775ba"));
+            buttonsArray[i].setBackground(getResources().getDrawable(R.drawable.game5btn_norm));
         }
     }
 
