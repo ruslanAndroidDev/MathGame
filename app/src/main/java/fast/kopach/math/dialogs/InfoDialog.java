@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import fast.kopach.math.PreferenceHelper;
 import fast.kopach.math.R;
@@ -23,9 +24,10 @@ import fast.kopach.math.games.VariablesInGame;
  */
 
 public class InfoDialog extends DialogFragment {
-    TextView tvClose;
+    TextView tvHowPlay;
     Context context;
     int drawableForInfo = 0;
+    String textHowPlay;
 
     public InfoDialog(Context context) {
          this.context = context;
@@ -39,40 +41,44 @@ public class InfoDialog extends DialogFragment {
         View v = inflater.inflate(R.layout.dialog_info_about_coin, null);
         builder.setView(v);
 
-        tvClose = (TextView) v.findViewById(R.id.info_tv_close);
-        ImageView iView = (ImageView) v.findViewById(R.id.iv_game);
+        tvHowPlay = (TextView) v.findViewById(R.id.tvHowPlay);
+       // ImageView iView = (ImageView) v.findViewById(R.id.iv_game);
 
         //Налаштування виводу меж в рівнях в залежності від гри
         switch (PreferenceHelper.launchedGame) {
             case 1:
                drawableForInfo = R.drawable.game_1;
+               textHowPlay = "Input the answer to the example";
                 break;
             case 2:
-                drawableForInfo = R.drawable.game_1;
+                drawableForInfo = R.drawable.game_2;
+                textHowPlay = "Click on the missing number";
                 break;
             case 3:
-                drawableForInfo = R.drawable.game_1;
+                drawableForInfo = R.drawable.game_3;
+                textHowPlay = "Select the missing sign";
                 break;
             case 4:
-                drawableForInfo = R.drawable.game_1;
+                drawableForInfo = R.drawable.game_4;
+                textHowPlay = "Select numbers in ascending order";
                 break;
             case 5:
                 drawableForInfo = R.drawable.game_1;
+                textHowPlay = "Input the answer to the example";
                 break;
             case 6:
-                drawableForInfo = R.drawable.game_1;
+                drawableForInfo = R.drawable.game_6;
+                textHowPlay = "Find the wrong example";
                 break;
         }
 
-        Glide.with(context).
-                load(drawableForInfo).into(iView);
+        tvHowPlay.setText(textHowPlay);
+        ImageView imageView = (ImageView) v.findViewById(R.id.iv_game);
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
+        Glide.with(this).load(drawableForInfo).into(imageViewTarget);
 
-        tvClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+       // Glide.with(context).
+            //    load(R.drawable.image).into(imageView);
 
         builder.setCancelable(false);
         return builder.create();

@@ -19,7 +19,7 @@ public class VariablesInGame {
             {15, 30, 50, 75, 100}};  */
 
    // public static final int [] ARRAY_GAME_ADD_COIN = {8, 12, 25, 35, 45};
-    public static final int [] ARRAY_TIMER_IN_GAME = {15, 15, 15, 50, 30, 20};
+    public static final int [] ARRAY_TIMER_IN_GAME = {15, 10, 10, 45, 30, 20};
     public static final long TIME_TO_BONUS_COINS = 60*60*24*8 * 1000; //Множиться на тисячу, так як час подається в мілісікундах
     public static final int BOUNDARY_FOR_SHOW_RATE = 50;
 

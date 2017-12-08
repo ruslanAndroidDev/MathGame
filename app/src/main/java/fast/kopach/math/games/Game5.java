@@ -128,7 +128,7 @@ public class Game5 extends AppCompatActivity {
 
     void showDialog() {
         headerFragment.stopTimer();
-        replayDialog.show(getFragmentManager(), score, 6, score * 4, new ReplayDialog.ReplayListener() {
+        replayDialog.show(getFragmentManager(), score, 6, score, new ReplayDialog.ReplayListener() {
             @Override
             public void onReplayClick() {
                 score = 0;

@@ -110,7 +110,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
         } else {
             clickedBtn.setBackground(getResources().getDrawable(R.drawable.game5btn_error));
             headerFragment.stopTimer();
-            replayDialog.show(getFragmentManager(), score,4,score*5, this);
+            replayDialog.show(getFragmentManager(), score,4,score, this);
         }
     }
 
@@ -186,7 +186,7 @@ public class Game4 extends AppCompatActivity implements ReplayListener, HeaderFr
 
     @Override
     public void onTimerFinish() {
-        replayDialog.show(getFragmentManager(), score,4,score*5, this);
+        replayDialog.show(getFragmentManager(), score,4,score, this);
     }
 
     @Override

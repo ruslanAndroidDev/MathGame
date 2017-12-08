@@ -93,9 +93,9 @@ public class PreferenceHelper {
 
     public static int getPrice(int position) {
         if (position == 4) {
-            return 1;
+            return 150;
         } else if (position == 5) {
-            return 2;
+            return 200;
         } else if (position == 6) {
             return 200;
         }
